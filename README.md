@@ -10,15 +10,22 @@
      原因：  
      直接将事件绑定在#id元素上，如果#id元素在绑定后生成，则不会触发改事件  
    + 推荐使用以下形式    
+
+   	---
      $(document).on('click','#id',function(){  
         console.log('document');  
      });  
+	---
+
      原因：  
      将事件绑定在document DOM树下，当事件到达#id元素时，事件程序被执行，由于是从整个document下寻找的，可以保证事件被触发  
      [参考链接](https://stackoverflow.com/questions/14879168/document-onclick-id-function-vs-id-onclick-function "jQuery $(#id).click 和 $(document).on(click,#id,function(){ })区别")  
 3. 去除所有情况下a标签的下划线  
-   a {   text-decoration: none;  }  
-   a:hover, a:visited, a:link {  text-decoration: none; }  
+
+	---
+   	a {   text-decoration: none;  }  
+   	a:hover, a:visited, a:link {  text-decoration: none; }  
+   ---
 
 4. position：static/absolute/relative  
    + static: 默认值，无特殊定位，对象遵循HTML原则;  
