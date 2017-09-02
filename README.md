@@ -40,10 +40,15 @@
   没有定义 undefined  
   false本身   
 9. js发生异步的情况：需要等待  
-	等待的场景有：  
-		1. 定时任务：setTimeout, setInterval  
-		2. 网络请求：ajax请求，图片img加载等  
-		3. 绑定事件  
+	等待的场景有：
+
+		- 定时任务：setTimeout, setInterval  
+		- 网络请求：ajax请求，图片img加载等  
+		- 事件绑定  
+
+10. 防止浏览器缓存  
+	链接加上一个随机数，比如js中用Math.random()  
+
 
 
 
