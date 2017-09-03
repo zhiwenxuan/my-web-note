@@ -48,7 +48,7 @@
   空指针 null  
   没有定义 undefined  
   false本身   
-9. js发生异步的情况：需要等待  
+9. js发生异步的情况：需要等待  [博客整理](http://blog.csdn.net/lizhenqii/article/details/77806681 "博客整理")
 	等待的场景有：
 
 		- 定时任务：setTimeout, setInterval  
@@ -57,6 +57,48 @@
 
 10. 防止浏览器缓存  
 	链接加上一个随机数，比如js中用Math.random()  
+11. DOM的property和Attribute区别  
+	- property是js中对象中的标准属性,DOM.className  
+	- Attribute是标签文档中的属性,比如DOM.getAttribute('href')  
+12. 给标签添加自定义属性，需要在前面加上'data-'，比如：
+
+	```html
+	<a data-mid='2'>加上一个mid自定义属性</a>
+	```
+13. BOM常见操作  
+	1. 判断浏览器类型navigator  
+
+	```javascript
+	var ua = navigator.userAgent
+	var isChrome = ua.indexOf('Chrome')
+	console.log(isChrome)
+	```
+	2. 获取屏幕宽高screen  
+
+	```javascript
+	screen.width
+	screen.height
+	```
+	3. 拆解url各个部分location  
+	http://coding.xuan.com/lesson/115.html?id=1#mid=5390  
+
+	```javascript
+	location.href //获取整一个连接
+	location.protocol //协议类型 http
+	location.hash //如 #mid=5390 
+	location.search // 获取查询部分，如 ?id=1
+	location.pathname // 'lesson/115.html'
+	```
+	4. 页面回退与前进 history  
+	
+	```javascript
+	history.back()
+	history.forward()
+	```
+
+
+
+
 
 
 
