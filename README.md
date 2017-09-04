@@ -102,7 +102,7 @@
 	var random = random.slice(0,10) //截取前10位
 
 	```
-15. 使用XMLHttpRequest写一个简单的ajax请求(暂未兼容IE) [可参考文章]("http://blog.csdn.net/liujiahan629629/article/details/17126727" "可参考文章")   
+15. 使用XMLHttpRequest写一个简单的ajax请求(暂未兼容IE) [可参考文章](http://blog.csdn.net/liujiahan629629/article/details/17126727 "可参考文章")   
 
 	```javascript
 
@@ -138,11 +138,11 @@
 	 - 跨域原因：浏览器有同源策略，不执行其他源网站的脚本  
 	 - 同源条件：协议、域名、端口都要相同  
 	 - 允许跨域加载资源的三个标签
-	 	 - <img src= "xxx">
-	 	 - <link href= "xxx">
-	 	 - <script src= "xxx"></script>
+	 	 - '<img src= "xxx">'
+	 	 - '<link href= "xxx">'
+	 	 - '<script src= "xxx"></script>'
  	 - 所有的跨域请求都必须经过信息提供方允许
- 	 - 解决跨域的两种方法  [可参考文章]("http://blog.csdn.net/liujiahan629629/article/details/17126727" "可参考文章")  
+ 	 - 解决跨域的两种方法  [可参考文章](http://blog.csdn.net/liujiahan629629/article/details/17126727 "可参考文章")  
  	 	- jsonp 利用<script>标签中src属性能够跨域访问的特性，先定义了一个回调方法，然后将其当作url参数的一部分发送到服务端，服务端通过字符串拼接的方式将数据包裹在回调方法中，再返回回来
  	 	- 服务器端设置 http header
 
