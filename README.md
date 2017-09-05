@@ -150,10 +150,75 @@
 	
 	 - 容量：cookie大小只有4KB，sessionStorage和localStorage有5MB
 	 - 请求携带：所有http请求都要到上cookie，影响效率
-	 - API易用性：cookie简单，需要封装，document.cookie = …
-           其他两个简单易用，如localStorage.getItem(key) localStorage.setItem(key, value)
+	 - API易用性：cookie简单，需要封装，document.cookie = …  
+       其他两个简单易用，如localStorage.getItem(key) localStorage.setItem(key, value)
 
+19. 监听页面加载完的两种形式  
 
+	 - 资源全部加载完的情况
+	 ```javascript
+	 window.addEventListener('load', function(){
+	 	// 页面资源全部加载完全，包括视频、图片，才能执行
+	 })
+	 ```
+	 - 只渲染完DOM，未加载完全部资源
+	 ```javascript
+	 document.addEventListener('DOMContentLoaded', function(){
+	 	// 只渲染完DOM即可执行，未加载完全部资源，如视频、图片
+	 })
+	 ```
+20. 从输入url到看到页面的详细过程  
+	主要有两个过程  
+	 - 加载资源的过程
+	 	 1. 浏览器根据域名从DNS服务器获取IP地址
+	 	 2. 向该IP地址的机器发送http请求
+	 	 3. 服务器收到请求，返回数据
+	 	 4. 浏览器接受返回的数据
+	 - 渲染页面的过程
+	 	 1. 根据html渲染成DOM Tree，只是DOM节点结构，还没有样式
+	 	 2. 根据css渲染成CSSOM
+	 	 3. 将DOM Tree和CSSOM整合成渲染树RenderTree，既有结构，又有样式
+	 	 4. 浏览器根据RenderTree展示页面  
+	 	 5. 遇到script会发生阻塞，先执行JavaScript的内容，因为js可以改变DOM节点和结构  
+	 备注：第1、2、3步没有固定顺序，如果已经渲染CSSOM，在渲染html时，会即时渲染成RenderTree  
+
+21.	性能优化  [博客整理](http://blog.csdn.net/lizhenqii/article/details/77856311 "博客整理")  
+
+	 - 优化原则   
+		 - 多使用内存、缓存或其他方法   
+		 - 多使用CPU计算，减少网络请求  
+			 
+	 - 入手方面：   
+		- 加载页面和资源   
+			 - 资源压缩合并
+		 	 - 使用CDN
+	 	 	 - 静态资源缓存
+	 	 	 - 使用SSR后台渲染，数据直接渲染成HTML  
+	 	
+	  - 页面渲染  
+	 	 	 - CSS在前，JS在后，这跟渲染的过程有关
+	 	 	 - 懒加载
+	 	 	 - 减少DOM查询，DOM查询前可以先做缓存
+	 	 	 - 减少DOM操作，尽量合并操作
+	 	 	 - 事件节流，比如设置一定时间才监听
+	 	 	 - 尽早操作，比如使用DOMConentLoaded，代替onload
+
+22. 前端安全问题  
+
+	 - XSS 跨站脚本攻击  
+	 恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页之时，嵌入其中Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。  
+	 (跨站脚本攻击(Cross Site Scripting)，为不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS)   
+
+	 例子：写博客时，添加script代码获取用户cookie，发送到自己的服务器，当用户查看博客时，即可产生攻击  
+	 防范：前端替换关键字，例如替换 < 为 &lt;  > 为 &gt; 后端替换  
+	 - CSRF 跨站请求伪造  
+	 CSRF（Cross-site request forgery）跨站请求伪造，也被称为“One Click Attack”或者Session Riding，通常缩写为CSRF或者XSRF，是一种对网站的恶意利用。  
+	 尽管听起来像跨站脚本（XSS），但它与XSS非常不同，XSS利用站点内的信任用户，而CSRF则通过伪装来自受信任用户的请求来利用受信任的网站。与XSS攻击相比，CSRF攻击往往不大流行（因此对其进行防范的资源也相当稀少）和难以防范，所以被认为比XSS更具危险性。  
+
+	 例子：发钓鱼邮件，点击付款  
+	 防范：增加验证流程，如输入指纹、密码、短信验证码  
+
+ 
 
 
 
