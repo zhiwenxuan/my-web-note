@@ -1,6 +1,36 @@
-# 记录web前端学习的收获
 
-####### 2017.06.23 ##########  
+ # 记录web前端学习的收获
+<!-- TOC -->
+
+- [获取标签宽度](#获取标签宽度)
+- [jQuery点击事件失效](#jquery点击事件失效)
+- [去除所有情况下a标签的下划线](#去除所有情况下a标签的下划线)
+- [position：static/absolute/relative](#positionstaticabsoluterelative)
+- [隐藏多余溢出文字并显示省略号的样式](#隐藏多余溢出文字并显示省略号的样式)
+- [a标签点击失效](#a标签点击失效)
+- [:hover 改变其他元素样式时，只对子元素和相邻的兄弟元素有作用](#hover-改变其他元素样式时只对子元素和相邻的兄弟元素有作用)
+- [if语句为false的几种情况：](#if语句为false的几种情况)
+- [js发生异步的情况：需要等待](#js发生异步的情况需要等待)
+- [防止浏览器缓存](#防止浏览器缓存)
+- [DOM的property和Attribute区别](#dom的property和attribute区别)
+- [给标签添加自定义属性，需要在前面加上'data-'，比如：](#给标签添加自定义属性需要在前面加上data-比如)
+- [BOM常见操作](#bom常见操作)
+- [js获取随机数，要求长度一致的字符串格式](#js获取随机数要求长度一致的字符串格式)
+- [使用XMLHttpRequest写一个简单的ajax请求(暂未兼容IE)](#使用xmlhttprequest写一个简单的ajax请求暂未兼容ie)
+- [服务器状态码](#服务器状态码)
+- [跨域](#跨域)
+- [cookie 和 sessionStorage localStorage区别](#cookie-和-sessionstorage-localstorage区别)
+- [监听页面加载完的两种形式](#监听页面加载完的两种形式)
+- [从输入url到看到页面的详细过程](#从输入url到看到页面的详细过程)
+- [性能优化](#性能优化)
+- [前端安全问题](#前端安全问题)
+- [sass学习笔记](#sass学习笔记)
+- [国外信用卡格式](#国外信用卡格式)
+- [vue学习笔记](#vue学习笔记)
+
+<!-- /TOC -->
+
+
 ## 获取标签宽度  
    HTMLElement.offsetWidth  
    [参考链接](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetWidth "获取标签宽度")  
@@ -12,9 +42,9 @@
 + 推荐使用以下形式    
 
 ```javascript
-$(document).on('click','#id',function(){  
-	console.log('document');  
-});  
+  $(document).on('click','#id',function(){  
+    console.log('document');  
+  });  
 ```
 
 原因：  
@@ -24,8 +54,8 @@ $(document).on('click','#id',function(){
 ## 去除所有情况下a标签的下划线  
 
 ```css
-a {   text-decoration: none;  }  
-a:hover, a:visited, a:link {  text-decoration: none; }  
+  a {   text-decoration: none;  }  
+  a:hover, a:visited, a:link {  text-decoration: none; }  
 ```
 
 ## position：static/absolute/relative  
@@ -37,9 +67,9 @@ a:hover, a:visited, a:link {  text-decoration: none; }
 ## 隐藏多余溢出文字并显示省略号的样式  
 
 ```css
-overflow: hidden;  
-white-space: nowrap;  
-text-overflow: ellipsis;   
+  overflow: hidden;  
+  white-space: nowrap;  
+  text-overflow: ellipsis;   
 ```
 
 ## a标签点击失效
@@ -53,12 +83,15 @@ text-overflow: ellipsis;
 - 没有定义 undefined  
 - false本身   
 
-## js发生异步的情况：需要等待  [博客整理](http://blog.csdn.net/lizhenqii/article/details/77806681 "博客整理")  
+## js发生异步的情况：需要等待  
+
 等待的场景有：
 
 - 定时任务：setTimeout, setInterval  
 - 网络请求：ajax请求，图片img加载等  
 - 事件绑定  
+
+[博客整理](http://blog.csdn.net/lizhenqii/article/details/77806681 "博客整理")  
 
 ## 防止浏览器缓存  
 	链接加上一个随机数，比如js中用Math.random()  
@@ -75,54 +108,54 @@ text-overflow: ellipsis;
 1. 判断浏览器类型navigator  
 
 ```javascript
-var ua = navigator.userAgent
-var isChrome = ua.indexOf('Chrome')
-console.log(isChrome)
+  var ua = navigator.userAgent
+  var isChrome = ua.indexOf('Chrome')
+  console.log(isChrome)
 ```
 2. 获取屏幕宽高screen  
 
 ```javascript
-screen.width
-screen.height
+  screen.width
+  screen.height
 ```
 3. 拆解url各个部分location  
 http://coding.xuan.com/lesson/115.html?id=1#mid=5390  
 
 ```javascript
-location.href //获取整一个连接
-location.protocol //协议类型 http
-location.hash //如 #mid=5390 
-location.search // 获取查询部分，如 ?id=1
-location.pathname // 'lesson/115.html'
+  location.href //获取整一个连接
+  location.protocol //协议类型 http
+  location.hash //如 #mid=5390 
+  location.search // 获取查询部分，如 ?id=1
+  location.pathname // 'lesson/115.html'
 ```
 4. 页面回退与前进 history  
 
 ```javascript
-history.back()
-history.forward()
+  history.back()
+  history.forward()
 ```
 
 ## js获取随机数，要求长度一致的字符串格式  
 	
 ```javascript
-var random = Math.random() + '0000000000' //使用Math random 获取随机数，再加上10位0
-var random = random.slice(0,10) //截取前10位
+  var random = Math.random() + '0000000000' //使用Math random 获取随机数，再加上10位0
+  var random = random.slice(0,10) //截取前10位
 
 ```
-## 使用XMLHttpRequest写一个简单的ajax请求(暂未兼容IE) [可参考文章](http://blog.csdn.net/liujiahan629629/article/details/17126727 "可参考文章")   
+## 使用XMLHttpRequest写一个简单的ajax请求(暂未兼容IE) 
 
 ```javascript
 
-xhr = new XMLHttpRequest() //新建对象
-xhr.open('GET', '/api', false) //初始化请求
-xhr.onreadystatechange = function () {
-	if(xhr.readyState === 4){ //请求完成
-		if(xhr.status === 200){ //服务器返回状态码
-			window.alert(xhr.responseText)
-		}
-	}
-}
-xhr.send(null)
+  xhr = new XMLHttpRequest() //新建对象
+  xhr.open('GET', '/api', false) //初始化请求
+  xhr.onreadystatechange = function () {
+    if(xhr.readyState === 4){ //请求完成
+      if(xhr.status === 200){ //服务器返回状态码
+        window.alert(xhr.responseText)
+      }
+    }
+  }
+  xhr.send(null)
 
 ```
 状态码readyState说明  
@@ -132,6 +165,8 @@ xhr.send(null)
 - 2 : (载入完成) send方法执行完成，已经接受请求的全部内容  
 - 3 : (交互) 正在解析交互内容  
 - 4 : (完成) 解析内容完成，客户端可以调用  
+
+[可参考文章](http://blog.csdn.net/liujiahan629629/article/details/17126727 "可参考文章")   
 
 ## 服务器状态码
 	
@@ -164,15 +199,15 @@ xhr.send(null)
 
 - 资源全部加载完的情况
 ```javascript
-window.addEventListener('load', function(){
-// 页面资源全部加载完全，包括视频、图片，才能执行
-})
+  window.addEventListener('load', function(){
+  // 页面资源全部加载完全，包括视频、图片，才能执行
+  })
 ```
 - 只渲染完DOM，未加载完全部资源
 ```javascript
-document.addEventListener('DOMContentLoaded', function(){
-// 只渲染完DOM即可执行，未加载完全部资源，如视频、图片
-})
+  document.addEventListener('DOMContentLoaded', function(){
+  // 只渲染完DOM即可执行，未加载完全部资源，如视频、图片
+  })
 ```
 
 ## 从输入url到看到页面的详细过程  
@@ -190,7 +225,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	5. 遇到script会发生阻塞，先执行JavaScript的内容，因为js可以改变DOM节点和结构  
 备注：第1、2、3步没有固定顺序，如果已经渲染CSSOM，在渲染html时，会即时渲染成RenderTree  
 
-##	性能优化  [博客整理](http://blog.csdn.net/lizhenqii/article/details/77856311 "博客整理")  
+##	性能优化 
 
 - 优化原则   
 	- 多使用内存、缓存或其他方法   
@@ -209,8 +244,10 @@ document.addEventListener('DOMContentLoaded', function(){
 	- 减少DOM查询，DOM查询前可以先做缓存
 	- 减少DOM操作，尽量合并操作
 	- 事件节流，比如设置一定时间才监听
-	- 尽早操作，比如使用DOMConentLoaded，代替onload
-
+	- 尽早操作，比如使用DOMConentLoaded，代替onload  
+   
+ [博客整理](http://blog.csdn.net/lizhenqii/article/details/77856311 "博客整理")  
+ 
 ## 前端安全问题  
 
 - XSS 跨站脚本攻击  
@@ -231,68 +268,68 @@ CSRF（Cross-site request forgery）跨站请求伪造，也被称为“One Clic
 
 - Sass 允许将一套 CSS 样式嵌套进另一套样式中，内层的样式将它外层的选择器作为父选择器  
 ```
-#main p {
-	color: #00ff00;
-	width: 97%;
+  #main p {
+    color: #00ff00;
+    width: 97%;
 
-	.redbox {
-		background-color: #ff0000;
-		color: #000000;
-	}
-}
+    .redbox {
+      background-color: #ff0000;
+      color: #000000;
+    }
+  }
 
-编译为
+  编译为
 
-#main p {
-	color: #00ff00;
-	width: 97%; 
-}
-#main p .redbox {
-	background-color: #ff0000;
-	color: #000000; 
-}
+  #main p {
+    color: #00ff00;
+    width: 97%; 
+  }
+  #main p .redbox {
+    background-color: #ff0000;
+    color: #000000; 
+  }
 ```
 
 - 父选择器 &: 代表嵌套规则外层的父选择器  
 ```
-a {
-	font-weight: bold;
-	text-decoration: none;
-	&:hover { text-decoration: underline; }
-	body.firefox & { font-weight: normal; }
-}
+  a {
+    font-weight: bold;
+    text-decoration: none;
+    &:hover { text-decoration: underline; }
+    body.firefox & { font-weight: normal; }
+  }
 
-编译为
+  编译为
 
-a {
-	font-weight: bold;
-	text-decoration: none; 
-}
-a:hover {
-	text-decoration: underline; 
-}
-body.firefox a {
-	font-weight: normal; 
-}
+  a {
+    font-weight: bold;
+    text-decoration: none; 
+  }
+  a:hover {
+    text-decoration: underline; 
+  }
+  body.firefox a {
+    font-weight: normal; 
+  }
 ```
 
 - 属性嵌套: CSS 属性遵循相同的命名空间 (namespace)，比如 font-family, font-size, font-weight 都以 font 作为属性的命名空间。为了便于管理这样的属性，同时也为了避免了重复输入，Sass 允许将属性嵌套在命名空间中  
 ```
-.funky {
-	font: {
-		family: fantasy;
-		size: 30em;
-		weight: bold;
-	}
-}
+  .funky {
+    font: {
+      family: fantasy;
+      size: 30em;
+      weight: bold;
+    }
+  }
 
-编译为:  
+  编译为:  
 
-.funky {
-	font-family: fantasy;
-	font-size: 30em;
-	font-weight: bold; 
-}
+  .funky {
+    font-family: fantasy;
+    font-size: 30em;
+    font-weight: bold; 
+  }
 ```
 
 - 注释： Sass 支持标准的 CSS 多行注释 /* */，以及单行注释 //，前者会 被完整输出到编译后的 CSS 文件中，而后者则不会  
@@ -301,23 +338,23 @@ body.firefox a {
 变量支持块级作用域，嵌套规则内定义的变量只能在嵌套规则内使用（局部变量），不在嵌套规则内定义的变量则可在任何地方使用（全局变量）。将局部变量转换为全局变量可以添加 !global 声明。   
 可以在变量的结尾添加 !default 给一个未通过 !default 声明赋值的变量赋值，此时，如果变量已经被赋值，不会再被重新赋值，但是如果变量还没有被赋值，则会被赋予新的值。  
 ```
-$width: 5em;
+  $width: 5em;
 
-直接使用即调用变量：
+  直接使用即调用变量：
 
-#main {
-	width: $width;
-}
+  #main {
+    width: $width;
+  }
 ```
 - 数据类型: 支持 6 种主要的数据类型
 ```
-数字，1, 2, 13, 10px
-字符串，有引号字符串与无引号字符串，"foo", 'bar', baz
-颜色，blue, #04a3f9, rgba(255,0,0,0.5)
-布尔型，true, false
-空值，null
-数组 (list)，用空格或逗号作分隔符，1.5em 1em 0 2em, Helvetica, Arial, sans-serif
-maps, 相当于 JavaScript 的 object，(key1: value1, key2: value2)
+  数字，1, 2, 13, 10px
+  字符串，有引号字符串与无引号字符串，"foo", 'bar', baz
+  颜色，blue, #04a3f9, rgba(255,0,0,0.5)
+  布尔型，true, false
+  空值，null
+  数组 (list)，用空格或逗号作分隔符，1.5em 1em 0 2em, Helvetica, Arial, sans-serif
+  maps, 相当于 JavaScript 的 object，(key1: value1, key2: value2)
 ```
 
 - 运算  
@@ -330,38 +367,38 @@ maps, 相当于 JavaScript 的 object，(key1: value1, key2: value2)
 
 - 插值语句 #{}: 通过 #{} 插值语句可以在选择器或属性名中使用变量  
 ```
-$name: foo;
-$attr: border;
-p.#{$name} {
-	#{$attr}-color: blue;
-}
-编译为
+  $name: foo;
+  $attr: border;
+  p.#{$name} {
+    #{$attr}-color: blue;
+  }
+  编译为
 
-p.foo {
-	border-color: blue; 
-}
+  p.foo {
+    border-color: blue; 
+  }
 ```
 
 - @extend 引用另一个类的样式
 ```
-.error {
-border: 1px #f00;
-	background-color: #fdd;
-}
-.seriousError {
-	border-width: 3px;
-}
+  .error {
+  border: 1px #f00;
+    background-color: #fdd;
+  }
+  .seriousError {
+    border-width: 3px;
+  }
 
--->
+  -->
 
-.error {
-	border: 1px #f00;
-	background-color: #fdd;
-}
-.seriousError {
-	@extend .error;
-	border-width: 3px;
-}
+  .error {
+    border: 1px #f00;
+    background-color: #fdd;
+  }
+  .seriousError {
+    @extend .error;
+    border-width: 3px;
+  }
 ```
 - 控制指令: @if @for @each @while  
 
@@ -370,33 +407,33 @@ border: 1px #f00;
 
 1. 定义混合指令 @mixin  
 ```
-@mixin large-text {
-	font: {
-		family: Arial;
-		size: 20px;
-		weight: bold;
-	}
-	color: #ff0000;
-}
+  @mixin large-text {
+    font: {
+      family: Arial;
+      size: 20px;
+      weight: bold;
+    }
+    color: #ff0000;
+  }
 ```
 2. 引用混合样式 @include  
 ```
-.page-title {
-	@include large-text;
-	padding: 4px;
-	margin-top: 10px;
-}
+  .page-title {
+    @include large-text;
+    padding: 4px;
+    margin-top: 10px;
+  }
 ```
 3. 参数
 ```
-@mixin sexy-border($color, $width) {
-border: {
-	color: $color;
-	width: $width;
-	style: dashed;
-}
-}
-p { @include sexy-border(blue, 1in); }
+  @mixin sexy-border($color, $width) {
+  border: {
+    color: $color;
+    width: $width;
+    style: dashed;
+  }
+  }
+  p { @include sexy-border(blue, 1in); }
 ```
 	  
 ## 国外信用卡格式
@@ -504,17 +541,16 @@ cards = [
 
 - vue-router别名  
 /a 的别名是 /b，意味着，当用户访问 /b 时，URL 会保持为 /b，但是路由匹配则为 /a，就像用户访问 /a 一样。  
+“别名”的功能让你可以自由地将 UI 结构映射到任意的 URL，而不是受限于配置的嵌套路由结构。  
 上面对应的路由配置为：  
 	
-```
-const router = new VueRouter({
-	routes: [
-		{ path: '/a', component: A, alias: '/b' }
-	]
-})
-```
-	
-“别名”的功能让你可以自由地将 UI 结构映射到任意的 URL，而不是受限于配置的嵌套路由结构。  
+  ```
+  const router = new VueRouter({
+    routes: [
+      { path: '/a', component: A, alias: '/b' }
+    ]
+  })
+  ```  
 
 - 关于watch 和 computed  
 	- 尽可能不要修改wacth和computed的值，避免造成死循环。
@@ -524,11 +560,11 @@ const router = new VueRouter({
 
 - 给router-view加上过渡transition，使得路由跳转有过渡的效果  
 
-	```
-	<transition name="fade" mode="out-in">
-		<router-view />
-	</transition>
-	```
+  ```
+  <transition name="fade" mode="out-in">
+    <router-view />
+  </transition>
+  ```
 - 
 
 
