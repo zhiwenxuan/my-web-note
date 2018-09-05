@@ -1,4 +1,4 @@
-记录web前端学习的收获
+# 记录web前端学习的收获
 
 ####### 2017.06.23 ##########  
 1. 获取标签宽度  
@@ -490,6 +490,32 @@ cards = [
   ];
 
 ```
+
+25. vue学习笔记  
+
+	- vue-router别名  
+	/a 的别名是 /b，意味着，当用户访问 /b 时，URL 会保持为 /b，但是路由匹配则为 /a，就像用户访问 /a 一样。  
+	上面对应的路由配置为：  
+	```
+	const router = new VueRouter({
+		routes: [
+			{ path: '/a', component: A, alias: '/b' }
+		]
+	})
+	```
+	“别名”的功能让你可以自由地将 UI 结构映射到任意的 URL，而不是受限于配置的嵌套路由结构。  
+
+	- 关于watch 和 computed  
+		- 尽可能不要修改wacth和computed的值，避免造成死循环。
+		- wacth想监听对象内部属性变化时，可以使用deep：true 或者 换成字符串格式监听：obj.a -> 'obj.a'，推荐使用后者
+		- 当app里面的任意属性发生变化时，template会重新渲染。  
+ 			当template 是通过computed方法获取值时，只有computed 监听的属性发生变化时，才会重新调用函数，否则computed会取缓存里面的值；   
+			当template是通过methods里面的方法获取值时，只要app的任意属性发生变化，都会调用函数。  
+ 			所以，template相对于通过methods里面的方法获取值，通过computed获取值性能会更高。  
+
+
+
+
 
 
 
