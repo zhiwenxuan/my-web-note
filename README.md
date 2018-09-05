@@ -565,7 +565,10 @@ cards = [
     <router-view />
   </transition>
   ```
-- 
+- 路由传参的三种方法：  
+1. /:id   通过this.$route获得
+2. 设置路由配置的props属性为 true，组件直接在props中获得,比如：props['id']
+3. 直接在组件中调用this.$route.query
 
 
 
