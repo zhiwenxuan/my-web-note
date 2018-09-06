@@ -27,6 +27,9 @@
 - [sass学习笔记](#sass学习笔记)
 - [国外信用卡格式](#国外信用卡格式)
 - [vue学习笔记](#vue学习笔记)
+    - [关于vue.js](#关于vuejs)
+    - [关于vue-router](#关于vue-router)
+    - [关于vuex](#关于vuex)
 
 <!-- /TOC -->
 
@@ -539,36 +542,63 @@ cards = [
 
 ## vue学习笔记  
 
-- vue-router别名  
-/a 的别名是 /b，意味着，当用户访问 /b 时，URL 会保持为 /b，但是路由匹配则为 /a，就像用户访问 /a 一样。  
-“别名”的功能让你可以自由地将 UI 结构映射到任意的 URL，而不是受限于配置的嵌套路由结构。  
-上面对应的路由配置为：  
-	
-  ```
-  const router = new VueRouter({
-    routes: [
-      { path: '/a', component: A, alias: '/b' }
-    ]
-  })
-  ```  
+### 关于vue.js
 
 - 关于watch 和 computed  
 	- 尽可能不要修改wacth和computed的值，避免造成死循环。
 	- wacth想监听对象内部属性变化时，可以使用deep：true 或者 换成字符串格式监听：obj.a -> 'obj.a'，推荐使用后者
 	- 当app里面的任意属性发生变化时，template会重新渲染。当template 是通过computed方法获取值时，只有computed 监听的属性发生变化时，才会重新调用函数，否则computed会取缓存里面的值；当template是通过methods里面的方法获取值时，只要app的任意属性发生变化，都会调用函数。所以，template相对于通过methods里面的方法获取值，通过computed获取值性能会更高。  
-		
 
+### 关于vue-router
+
+- vue-router别名  
+/a 的别名是 /b，意味着，当用户访问 /b 时，URL 会保持为 /b，但是路由匹配则为 /a，就像用户访问 /a 一样。  
+“别名”的功能让你可以自由地将 UI 结构映射到任意的 URL，而不是受限于配置的嵌套路由结构。  
+上面对应的路由配置为：  
+	
+```
+  const router = new VueRouter({
+    routes: [
+      { path: '/a', component: A, alias: '/b' }
+    ]
+  })
+```  
 - 给router-view加上过渡transition，使得路由跳转有过渡的效果  
 
-  ```
+```
   <transition name="fade" mode="out-in">
     <router-view />
   </transition>
-  ```
+```
+
 - 路由传参的三种方法：  
 1. /:id   通过this.$route获得
 2. 设置路由配置的props属性为 true，组件直接在props中获得,比如：props['id']
 3. 直接在组件中调用this.$route.query
+
+- vue-router导航
+
+```
+  const userId = 123
+  //通过path
+  router.push({ name: 'user', params: { userId }}) // -> /user/123
+  //通过name
+  router.push({ path: `/user/${userId}` }) // -> /user/123
+
+  // query 带查询参数
+  router.push({ path: 'register', query: { plan: 'private' }}) // -> /register?plan=private
+
+  注意：如果通过 path，参数params 会被忽略
+```
+### 关于vuex
+
+
+
+
+		
+
+
+
 
 
 
