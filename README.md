@@ -517,11 +517,11 @@ cards = [
 ```
 
 - 路由传参的三种方法：  
-1. /:id   通过this.$route获得
-2. 设置路由配置的props属性为 true，组件直接在props中获得,比如：props['id']
-3. 直接在组件中调用this.$route.query
+  1. /:id   通过this.$route获得
+  2. 设置路由配置的props属性为 true，组件直接在props中获得,比如：props['id']
+  3. 直接在组件中调用this.$route.query  
 
-- vue-router导航
+- vue-router编程式导航
 
 ```
   const userId = 123
@@ -535,6 +535,221 @@ cards = [
 
   注意：如果通过 path，参数params 会被忽略
 ```
+
+- vue-router命名视图：同一个页面有多个组件来组成
+```
+一种常见的布局：上左右布局
+
+<router-view class="view header" name="header"></router-view>
+<router-view class="view left" name="left"></router-view>
+<router-view class="view right" name="main-content"></router-view>
+
+不过这种布局也可以由一个组件组合其他多个组件来合成一个路由。看情况取舍。
+```
+
+- vue-router导航守卫
+
+  - 总共有三种模式
+    - 全局守卫
+    ```
+      const router = new VueRouter({ ... })
+
+      1. 全局前置守卫
+      router.beforeEach((to, from, next) => {
+        //do something
+      })
+
+      三个参数解释：
+
+      to(type: Route): 即将要进入的目标 路由对象
+
+      from(type: Route): 当前导航正要离开的路由
+
+      next(type: Function): 一定要调用该方法来 resolve 这个钩子。执行效果依赖 next 方法的调用参数。
+
+            next(): 进行管道中的下一个钩子。如果全部钩子执行完了，则导航的状态就是 confirmed (确认的)。
+
+            next(false): 中断当前的导航。如果浏览器的 URL 改变了 (可能是用户手动或者浏览器后退按钮)，那么 URL 地址会重置到 from 路由对应的地址。
+
+            next('/') 或者 next({ path: '/' }): 跳转到一个不同的地址。当前的导航被中断，然后进行一个新的导航。你可以向 next 传递任意位置对象，且允许设置诸如 replace: true、name: 'home' 之类的选项以及任何用在 router-link 的 to prop 或 router.push 中的选项。
+
+            next(error): (2.4.0+) 如果传入 next 的参数是一个 Error 实例，则导航会被终止且该错误会被传递给 router.onError() 注册过的回调。
+
+      2. 全局解析守卫
+      router.beforeResolve( (to, from, next) => {
+        //导航被确认之前，同时在所有组件内守卫和异步路由组件被解析之后，被调用
+      } )
+      
+      3. 全局后置钩子
+      router.afterEach((to, from) =>{
+        // do something
+      })
+      不会接受next函数来改变导航
+
+    ```
+    - 路由独享的守卫：在配置路由时使用
+    ```
+      const router = new VueRouter({
+        routes: [
+          {
+            path: '/foo',
+            component: Foo,
+            beforeEnter: (to, from, next) => {
+              // do something
+            }
+          }
+        ]
+      })
+      beforeEnter: 接收的三个参数和全局接收的一样
+    ```
+
+    - 组件内守卫
+
+    ```
+      const Foo = {
+        template: `...`,
+        beforeRouteEnter (to, from, next) {
+          // 在渲染该组件的对应路由被 confirm 前调用
+          // 不！能！获取组件实例 `this`
+          // 因为当守卫执行前，组件实例还没被创建
+        },
+        beforeRouteUpdate (to, from, next) {
+          // 在当前路由改变，但是该组件被复用时调用
+          // 触发时间：带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
+          // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
+          // 可以访问组件实例 `this`
+        },
+        beforeRouteLeave (to, from, next) {
+          // 导航离开该组件的对应路由时调用
+          // 可以访问组件实例 `this`
+        }
+      }
+      注意⚠️ ：
+      1. beforeRouteEnter不能获取组件示例this，但是可以通过next来获取
+        beforeRouteEnter( (to, from, next) => {
+          next(vm => {
+            vm.xxx
+          })
+        })
+
+      2. beforeRouteUpdate可以用于子路有发生变化时，数据请求，比如：工程id发生变化了。
+
+      3. beforeRouteLeave其中的一个用法是当用户填写表单没有保存数据点击离开时，可以询问用户是否要离开
+        beforeRouteLeave (to, from, next) {
+        let isConfirm =  window.confirm("Do you really want to leave, you have not saved your changes.");
+        if(isConfirm){
+          next();
+        }else{
+          next(false);
+        }
+        }
+
+    ```
+  - 导航守卫执行顺序
+    大体流程：
+    全局前置守卫beforeEach -> 路由beforeEnter -> 组件beforeRouteEnter -> 全局解析守卫beforeResolve -> 全局后置钩子afterEach    
+
+    完整流程：
+    1. 导航被触发。
+    2. 在失活的组件里调用离开守卫。
+    3. 调用全局的 beforeEach 守卫。
+    4. 在重用的组件里调用 beforeRouteUpdate 守卫 (2.2+)。(重用的组件才执行)
+    5. 在路由配置里调用 beforeEnter。
+    6. 解析异步路由组件。
+    7. 在被激活的组件里调用 beforeRouteEnter。
+    8. 调用全局的 beforeResolve 守卫 (2.5+)。
+    9. 导航被确认。
+    10. 调用全局的 afterEach 钩子。
+    11. 触发 DOM 更新。
+    12. 用创建好的实例调用 beforeRouteEnter 守卫中传给 next 的回调函数。  
+
+- 路由元信息
+  定义路由的时候可以配置 meta 字段，可用于判断该路由是否需要登录之类的
+  ```
+    const router = new VueRouter({
+      routes: [
+        {
+          path: '/foo',
+          component: Foo,
+          children: [
+            {
+              path: 'bar',
+              component: Bar,
+              // a meta field
+              meta: { requiresAuth: true }
+            }
+          ]
+        }
+      ]
+    })
+
+    在全局前置守卫获取meta并判断处理
+    router.beforeEach((to, from, next) => {
+      if( to.meta.requiresAuth ) { //需要登录
+        if( !isLogin ) { //没有登录，跳转到登录页面
+          router.push({name: "login"});
+          return;
+        }
+        next(); //已经登录直接往下执行
+      }else{ //不需要登录直接往下执行
+        next();
+      }
+    })
+  ```
+- 数据获取
+  1. 导航完成后获取数据：在created生命周期中获取
+  2. 导航进入之前获取：在beforeRouteEnter导航守卫中获取，如果是重用组件，可以在beforeRouteUpdate中更新数据
+  ```
+    export default {
+      data () {
+        return {
+          post: null,
+          error: null
+        }
+      },
+      beforeRouteEnter (to, from, next) {
+        getPost(to.params.id, (err, post) => {
+          next(vm => vm.setData(err, post))
+        })
+      },
+      // 路由改变前，组件就已经渲染完了
+      // 逻辑稍稍不同
+      beforeRouteUpdate (to, from, next) {
+        this.post = null
+        getPost(to.params.id, (err, post) => {
+          this.setData(err, post)
+          next()
+        })
+      },
+      methods: {
+        setData (err, post) {
+          if (err) {
+            this.error = err.toString()
+          } else {
+            this.post = post
+          }
+        }
+      }
+    }
+  ```
+- 滚动行为
+  ```
+    const router = new VueRouter({
+      routes: [...],
+      scrollBehavior (to, from, savedPosition) {
+        // return 期望滚动到哪个的位置
+        // return {x:0, y:0} 回到顶部
+      }
+    })
+  ```
+- 路由懒加载： 把组件按组分块
+  ```
+  const Foo = () => import(/* webpackChunkName: "group-foo" */ './Foo.vue')
+  const Bar = () => import(/* webpackChunkName: "group-foo" */ './Bar.vue')
+  const Baz = () => import(/* webpackChunkName: "group-foo" */ './Baz.vue')
+  ```
+
+
 ### 关于vuex
 
 
