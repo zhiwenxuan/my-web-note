@@ -29,6 +29,7 @@
     - [关于vue-router](#关于vue-router)
     - [关于vuex](#关于vuex)
     - [核心概念](#核心概念)
+    - [模块化(待补充)](#模块化待补充)
     - [辅助函数](#辅助函数)
     - [项目结构](#项目结构)
     - [热重载](#热重载)
@@ -898,11 +899,72 @@ Promise嵌套：
   })
 ```
 
+### 模块化(待补充)
+
 ### 辅助函数
 - mapState
-- 
+- mapGetters
+- mapMutations
+- mapActions
+
 ### 项目结构
+```
+  ├── index.html
+  ├── main.js
+  ├── api
+  │   └── ... # 抽取出API请求
+  ├── components
+  │   ├── App.vue
+  │   └── ...
+  └── store                 # 
+      ├── index.js          # 我们组装模块并导出 store 的地方
+      ├── states            # states文件夹
+      ├── getter            # getter
+      ├── actions           # actions
+      ├── mutations         # mutations
+      └── modules
+          ├── cart.js       # 购物车模块
+          └── products.js   # 产品模块
+```
 ### 热重载
+
+```javascript
+
+  // store.js
+  import Vue from 'vue'
+  import Vuex from 'vuex'
+  import mutations from './mutations'
+  import moduleA from './modules/a'
+
+  Vue.use(Vuex)
+
+  const state = { ... }
+
+  const store = new Vuex.Store({
+    state,
+    mutations,
+    modules: {
+      a: moduleA
+    }
+  })
+
+  if (module.hot) {
+    // 使 action 和 mutation 成为可热重载模块
+    module.hot.accept(['./mutations', './modules/a'], () => {
+      // 获取更新后的模块
+      // 因为 babel 6 的模块编译格式问题，这里需要加上 `.default`
+      const newMutations = require('./mutations').default
+      const newModuleA = require('./modules/a').default
+      // 加载新模块
+      store.hotUpdate({
+        mutations: newMutations,
+        modules: {
+          a: newModuleA
+        }
+      })
+    })
+  }
+```
 
 
 ## 构建工具
