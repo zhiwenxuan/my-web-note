@@ -28,6 +28,10 @@
     - [关于vue.js](#关于vuejs)
     - [关于vue-router](#关于vue-router)
     - [关于vuex](#关于vuex)
+    - [核心概念](#核心概念)
+    - [辅助函数](#辅助函数)
+    - [项目结构](#项目结构)
+    - [热重载](#热重载)
 - [构建工具](#构建工具)
 - [HTTP相关](#http相关)
     - [服务器状态码](#服务器状态码)
@@ -88,7 +92,7 @@
 ### sass学习笔记  
 
 - Sass 允许将一套 CSS 样式嵌套进另一套样式中，内层的样式将它外层的选择器作为父选择器  
-```
+``` css
   #main p {
     color: #00ff00;
     width: 97%;
@@ -112,7 +116,7 @@
 ```
 
 - 父选择器 &: 代表嵌套规则外层的父选择器  
-```
+``` css
   a {
     font-weight: bold;
     text-decoration: none;
@@ -135,7 +139,7 @@
 ```
 
 - 属性嵌套: CSS 属性遵循相同的命名空间 (namespace)，比如 font-family, font-size, font-weight 都以 font 作为属性的命名空间。为了便于管理这样的属性，同时也为了避免了重复输入，Sass 允许将属性嵌套在命名空间中  
-```
+``` css
   .funky {
     font: {
       family: fantasy;
@@ -187,7 +191,7 @@
 - 函数
 
 - 插值语句 #{}: 通过 #{} 插值语句可以在选择器或属性名中使用变量  
-```
+``` css
   $name: foo;
   $attr: border;
   p.#{$name} {
@@ -201,7 +205,7 @@
 ```
 
 - @extend 引用另一个类的样式
-```
+``` css
   .error {
   border: 1px #f00;
     background-color: #fdd;
@@ -227,7 +231,7 @@
 混合指令（Mixin）用于定义可重复使用的样式，避免了使用无语意的 class，比如 .float-left。混合指令可以包含所有的 CSS 规则，绝大部分 Sass 规则，甚至通过参数功能引入变量，输出多样化的样式。  
 
 1. 定义混合指令 @mixin  
-```
+``` css
   @mixin large-text {
     font: {
       family: Arial;
@@ -238,7 +242,7 @@
   }
 ```
 2. 引用混合样式 @include  
-```
+``` css
   .page-title {
     @include large-text;
     padding: 4px;
@@ -246,7 +250,7 @@
   }
 ```
 3. 参数
-```
+``` css
   @mixin sexy-border($color, $width) {
   border: {
     color: $color;
@@ -383,7 +387,7 @@ http://coding.xuan.com/lesson/115.html?id=1#mid=5390
 
 ### 国外信用卡格式
 
-```
+``` javascript
 defaultFormat = /(\d{1,4})/g;
 cards = [
     {
@@ -482,6 +486,83 @@ cards = [
 
 ```
 
+- Promise
+一个简单的例子：
+``` javascript
+  let httpBasePostRequest = (url, params) => {
+      return new Promise((resolve, reject) => {
+          axios.post(url, params).then(
+              res => {
+                  resolve(res); //成功返回
+              },
+              err => {
+                  reject(err); //失败
+              }
+          );
+      });
+  }
+
+  let url = 'https://www.exmple.com//login';
+  let params = {
+    user: 'zhangsan',
+    password: '123456'
+  };
+  httpBasePostRequest(url, params).then( (res) => {
+    console.log('Login success.');
+  }).catch( (err) => {
+    console.log(err);
+  })
+
+  备注：
+  Promise.resolve只可以接受一个参数
+  参数类型有三种：
+  Promise.resolve(value); //需要解析的参数
+  Promise.resolve(promise); //直接返回这个Promise对象
+  Promise.resolve(thenable);
+
+  Promise.reject //返回一个带有拒绝原因reason参数的Promise对象
+```
+
+Promise嵌套：
+``` javascript
+
+  //实现一秒中后(n * n)，接着一秒后(n*n + n*n),最后打印出来
+
+  //1秒后执行num1*num1
+  function MyMultiply(num1) {
+    return new Promise((resolve, reject) => {
+    console.log('start mutil')
+    setTimeout(resolve, 1000, num1*num1);
+    })
+  };
+
+  //1秒后执行num1+num1
+  function myAdd(num1) {
+    return new Promise( (resolve, reject) => {
+      console.log('start add')
+      setTimeout(resolve, 1000, num1+ num1)
+      } )
+  }
+
+  new Promise( (resolve, reject) => {
+    console.log('Start promise');
+    let n = 5;
+    resolve(n);
+  } )
+  .then(MyMultiply)
+  .then(myAdd)
+  .then(result => {
+    console.log(result)
+  });
+
+  结果：
+  Start promise
+  Promise {<pending>}
+  start mutil
+  start add
+  50
+```
+
 
 
 ## Vue相关
@@ -501,7 +582,7 @@ cards = [
 “别名”的功能让你可以自由地将 UI 结构映射到任意的 URL，而不是受限于配置的嵌套路由结构。  
 上面对应的路由配置为：  
 	
-```
+``` javascript
   const router = new VueRouter({
     routes: [
       { path: '/a', component: A, alias: '/b' }
@@ -510,7 +591,7 @@ cards = [
 ```  
 - 给router-view加上过渡transition，使得路由跳转有过渡的效果  
 
-```
+``` html
   <transition name="fade" mode="out-in">
     <router-view />
   </transition>
@@ -523,7 +604,7 @@ cards = [
 
 - vue-router编程式导航
 
-```
+``` javascript
   const userId = 123
   //通过name
   router.push({ name: 'user', params: { userId }}) // -> /user/123
@@ -537,7 +618,7 @@ cards = [
 ```
 
 - vue-router命名视图：同一个页面有多个组件来组成
-```
+``` html
 一种常见的布局：上左右布局
 
 <router-view class="view header" name="header"></router-view>
@@ -588,7 +669,7 @@ cards = [
 
     ```
     - 路由独享的守卫：在配置路由时使用
-    ```
+    ``` javascript
       const router = new VueRouter({
         routes: [
           {
@@ -600,12 +681,12 @@ cards = [
           }
         ]
       })
-      beforeEnter: 接收的三个参数和全局接收的一样
+      //beforeEnter: 接收的三个参数和全局接收的一样
     ```
 
     - 组件内守卫
 
-    ```
+    ``` javascript
       const Foo = {
         template: `...`,
         beforeRouteEnter (to, from, next) {
@@ -624,24 +705,24 @@ cards = [
           // 可以访问组件实例 `this`
         }
       }
-      注意⚠️ ：
-      1. beforeRouteEnter不能获取组件示例this，但是可以通过next来获取
+      //注意⚠️ ：
+      //1. beforeRouteEnter不能获取组件示例this，但是可以通过next来获取
         beforeRouteEnter( (to, from, next) => {
           next(vm => {
             vm.xxx
           })
         })
 
-      2. beforeRouteUpdate可以用于子路有发生变化时，数据请求，比如：工程id发生变化了。
+      //2. beforeRouteUpdate可以用于子路有发生变化时，数据请求，比如：工程id发生变化了。
 
-      3. beforeRouteLeave其中的一个用法是当用户填写表单没有保存数据点击离开时，可以询问用户是否要离开
+      //3. beforeRouteLeave其中的一个用法是当用户填写表单没有保存数据点击离开时，可以询问用户是否要离开  
         beforeRouteLeave (to, from, next) {
-        let isConfirm =  window.confirm("Do you really want to leave, you have not saved your changes.");
-        if(isConfirm){
-          next();
-        }else{
-          next(false);
-        }
+          let isConfirm =  window.confirm("Do you really want to leave, you have not saved your changes.");
+          if(isConfirm){
+            next();
+          }else{
+            next(false);
+          }
         }
 
     ```
@@ -665,7 +746,7 @@ cards = [
 
 - 路由元信息
   定义路由的时候可以配置 meta 字段，可用于判断该路由是否需要登录之类的
-  ```
+  ``` javascript
     const router = new VueRouter({
       routes: [
         {
@@ -699,7 +780,7 @@ cards = [
 - 数据获取
   1. 导航完成后获取数据：在created生命周期中获取
   2. 导航进入之前获取：在beforeRouteEnter导航守卫中获取，如果是重用组件，可以在beforeRouteUpdate中更新数据
-  ```
+  ``` javascript
     export default {
       data () {
         return {
@@ -733,7 +814,7 @@ cards = [
     }
   ```
 - 滚动行为
-  ```
+  ``` javascript
     const router = new VueRouter({
       routes: [...],
       scrollBehavior (to, from, savedPosition) {
@@ -743,7 +824,7 @@ cards = [
     })
   ```
 - 路由懒加载： 把组件按组分块
-  ```
+  ``` javascript
   const Foo = () => import(/* webpackChunkName: "group-foo" */ './Foo.vue')
   const Bar = () => import(/* webpackChunkName: "group-foo" */ './Bar.vue')
   const Baz = () => import(/* webpackChunkName: "group-foo" */ './Baz.vue')
@@ -751,6 +832,77 @@ cards = [
 
 
 ### 关于vuex
+[参考Vuex官网](https://vuex.vuejs.org/zh/ "Vuex官网")  
+
+### 核心概念
+``` javascript
+  const store = new Vuex.Store({
+    //Vuex使用单一状态树🌲 ，使用一个对象来保存整个应用层级的状态。
+    //state就是这个对象，state里面的属性会保存整个应用需要保存的状态。
+    state: {
+      count: 0,
+      user: {
+        name: 'zhangsan'
+      }
+    },
+    //Getter其实跟state差不多，但state的数据格式之类的不太满足要求时，可以在getter中做一些处理再返回。比如：后台返回数据的再一次封装。
+    getters: {
+      doubleCount: state =>  state.count * 2,
+      evenOrOdd: state => state.count % 2 === 0 ? 'even' : 'odd'
+    },
+    //用来更改state的值
+    //必须是同步函数
+    //遵守Vue的响应规则
+    //使用commit来触发更改， store.commit('incrementWithN', 10);
+    mutations: {
+      //参数1: state
+      //参数2: 一般是一个对象
+      incrementWithN (state, n) {
+        state.count += n
+      },
+      //当要更改state里面的对象的属性,比如：user的name属性，name要提前声明
+      //要不得使用
+      setUserName (state, name) {
+        state.user.name = name;
+      },
+      //user的phone属性没有声明
+      setUserPhone (state, phone) {
+        Vue.set(state.user, 'phone', phone); //使用Vue.set设置
+        //或者使用点语法
+        state.user = {...state.user, 'phone': phone};
+      }
+    },
+    //actions类似mutations，
+    //不同点：
+    //Action 提交的是 mutation，而不是直接变更状态；
+    //Action 可以包含任意异步操作。
+    //使用store.dispacth触发， store.dispacth('incrementWithNAsync', n)
+    actions: {
+      //context 可以用使用到的模块替换
+      //incrementWithNAsync ({commit}, n) -> commit('incrementWithN', n)
+      incrementWithNAsync (context, n) {
+        //异步和触发mutation
+        setTimeout( () => {
+          context.commit('incrementWithN', n);
+        }, 1000);
+      },
+      // 假设 getData() 和 getOtherData() 返回的是 Promise
+      async actionA ({ commit }) {
+        commit('gotData', await getData())
+      },
+      async actionB ({ dispatch, commit }) {
+        await dispatch('actionA') // 等待 actionA 完成
+        commit('gotOtherData', await getOtherData())
+      }
+    }
+  })
+```
+
+### 辅助函数
+- mapState
+- 
+### 项目结构
+### 热重载
 
 
 ## 构建工具
