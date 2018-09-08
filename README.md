@@ -24,6 +24,9 @@
     - [cookie 和 sessionStorage localStorage区别](#cookie-和-sessionstorage-localstorage区别)
     - [监听页面加载完的两种形式](#监听页面加载完的两种形式)
     - [国外信用卡格式](#国外信用卡格式)
+    - [Promise](#promise)
+    - [ES7](#es7)
+    - [ES8](#es8)
 - [Vue相关](#vue相关)
     - [关于vue.js](#关于vuejs)
     - [关于vue-router](#关于vue-router)
@@ -487,7 +490,7 @@ cards = [
 
 ```
 
-- Promise
+### Promise
 一个简单的例子：
 ``` javascript
   let httpBasePostRequest = (url, params) => {
@@ -564,7 +567,31 @@ Promise嵌套：
   50
 ```
 
+### ES7
+ES7主要增加了两项内容：幂运算(**) 和 Array.prototype.includes
 
+- 幂运算（**）
+```
+  7的8次方 => 7**8
+```
+
+- Array.property.includes
+判断数组是否包含某项元素，和ES6的Array.prototype.indexOf相似
+
+```javascript
+  ['a', 'b', 'c'].includes('a')          //true
+  ['a', 'b', 'c'].indexOf('a') > -1      //true
+```
+
+### ES8
+[可参考](https://blog.csdn.net/lihefei_coder/article/details/75068578, "ECMAScript规范第8版(ES2017)已发布，新功能一览")
+ES8主要增加：
+- 异步函数(Async functions)
+- Object.entries()和Object.values()
+- 字符串填充：padStart和padEnd
+- Object.getOwnPropertyDescriptors()
+- 函数参数列表与调用中的尾部逗号
+- 共享内存和原子（Shared memory and atomics）
 
 ## Vue相关
 
