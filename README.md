@@ -1,79 +1,82 @@
-# 记录 web 前端学习的收获
+# 1. 记录 web 前端学习的收获
 
 <!-- TOC -->
 
-- [记录 web 前端学习的收获](#记录-web-前端学习的收获)
-  - [HTML](#html)
-    - [获取标签宽度](#获取标签宽度)
-    - [DOM 的 property 和 Attribute 区别](#dom-的-property-和-attribute-区别)
-    - [给标签添加自定义属性](#给标签添加自定义属性)
-  - [CSS](#css)
-    - [去除所有情况下 a 标签的下划线](#去除所有情况下-a-标签的下划线)
-    - [position：static/absolute/relative](#positionstaticabsoluterelative)
-    - [隐藏多余溢出文字并显示省略号的样式](#隐藏多余溢出文字并显示省略号的样式)
-    - [a 标签点击失效](#a-标签点击失效)
-    - [:hover 改变其他元素样式时，只对子元素和相邻的兄弟元素有作用](#hover-改变其他元素样式时只对子元素和相邻的兄弟元素有作用)
-    - [sass 学习笔记](#sass-学习笔记)
-    - [Element UI](#element-ui)
-      - [el-popover](#el-popover)
-  - [JavaScript](#javascript)
-    - [jQuery 点击事件失效](#jquery-点击事件失效)
-    - [if 语句为 false 的几种情况：](#if-语句为-false-的几种情况)
-    - [js 发生异步的情况：需要等待](#js-发生异步的情况需要等待)
-    - [防止浏览器缓存](#防止浏览器缓存)
-    - [BOM 常见操作](#bom-常见操作)
-    - [js 获取随机数，要求长度一致的字符串格式](#js-获取随机数要求长度一致的字符串格式)
-    - [使用 XMLHttpRequest 写一个简单的 ajax 请求(暂未兼容 IE)](#使用-xmlhttprequest-写一个简单的-ajax-请求暂未兼容-ie)
-    - [cookie 和 sessionStorage localStorage 区别](#cookie-和-sessionstorage-localstorage-区别)
-    - [监听页面加载完的两种形式](#监听页面加载完的两种形式)
-    - [国外信用卡格式](#国外信用卡格式)
-    - [Promise](#promise)
-    - [ES7](#es7)
-    - [ES8](#es8)
-  - [Vue 相关](#vue-相关)
-    - [关于 vue.js](#关于-vuejs)
-      - [关于 watch 和 computed](#关于-watch-和-computed)
-    - [关于 vue-router](#关于-vue-router)
-    - [关于 vuex](#关于-vuex)
-      - [核心概念](#核心概念)
-      - [模块化(待补充)](#模块化待补充)
-      - [辅助函数](#辅助函数)
-      - [项目结构](#项目结构)
-      - [热重载](#热重载)
-  - [构建工具](#构建工具)
-  - [HTTP 相关](#http-相关)
-    - [服务器状态码](#服务器状态码)
-    - [跨域](#跨域)
-    - [从输入 url 到看到页面的详细过程](#从输入-url-到看到页面的详细过程)
-  - [性能优化](#性能优化)
-  - [前端安全](#前端安全)
-  - [其他](#其他)
+- [1. 记录 web 前端学习的收获](#1-记录-web-前端学习的收获)
+    - [1.1. HTML](#11-html)
+        - [1.1.1. 获取标签宽度](#111-获取标签宽度)
+        - [1.1.2. DOM 的 property 和 Attribute 区别](#112-dom-的-property-和-attribute-区别)
+        - [1.1.3. 给标签添加自定义属性](#113-给标签添加自定义属性)
+        - [1.1.4. 自动补全属性autocomplete](#114-自动补全属性autocomplete)
+    - [1.2. CSS](#12-css)
+        - [1.2.1. 去除所有情况下 a 标签的下划线](#121-去除所有情况下-a-标签的下划线)
+        - [1.2.2. position：static/absolute/relative](#122-positionstaticabsoluterelative)
+        - [1.2.3. 隐藏多余溢出文字并显示省略号的样式](#123-隐藏多余溢出文字并显示省略号的样式)
+        - [1.2.4. a 标签点击失效](#124-a-标签点击失效)
+        - [1.2.5. :hover 改变其他元素样式时，只对子元素和相邻的兄弟元素有作用](#125-hover-改变其他元素样式时只对子元素和相邻的兄弟元素有作用)
+        - [1.2.6. sass 学习笔记](#126-sass-学习笔记)
+        - [1.2.7. Element UI](#127-element-ui)
+            - [1.2.7.1. el-popover](#1271-el-popover)
+    - [1.3. JavaScript](#13-javascript)
+        - [1.3.1. jQuery 点击事件失效](#131-jquery-点击事件失效)
+        - [1.3.2. if 语句为 false 的几种情况：](#132-if-语句为-false-的几种情况)
+        - [1.3.3. js 发生异步的情况：需要等待](#133-js-发生异步的情况需要等待)
+        - [1.3.4. 防止浏览器缓存](#134-防止浏览器缓存)
+        - [1.3.5. BOM 常见操作](#135-bom-常见操作)
+        - [1.3.6. js 获取随机数，要求长度一致的字符串格式](#136-js-获取随机数要求长度一致的字符串格式)
+        - [1.3.7. 使用 XMLHttpRequest 写一个简单的 ajax 请求(暂未兼容 IE)](#137-使用-xmlhttprequest-写一个简单的-ajax-请求暂未兼容-ie)
+        - [1.3.8. cookie 和 sessionStorage localStorage 区别](#138-cookie-和-sessionstorage-localstorage-区别)
+        - [1.3.9. 监听页面加载完的两种形式](#139-监听页面加载完的两种形式)
+        - [1.3.10. 国外信用卡格式](#1310-国外信用卡格式)
+        - [1.3.11. Promise](#1311-promise)
+        - [1.3.12. ES7](#1312-es7)
+        - [1.3.13. ES8](#1313-es8)
+    - [1.4. Vue 相关](#14-vue-相关)
+        - [1.4.1. 关于 vue.js](#141-关于-vuejs)
+            - [1.4.1.1. 关于 watch 和 computed](#1411-关于-watch-和-computed)
+        - [1.4.2. 关于 vue-router](#142-关于-vue-router)
+        - [1.4.3. 关于 vuex](#143-关于-vuex)
+            - [1.4.3.1. 核心概念](#1431-核心概念)
+            - [1.4.3.2. 模块化(待补充)](#1432-模块化待补充)
+            - [1.4.3.3. 辅助函数](#1433-辅助函数)
+            - [1.4.3.4. 项目结构](#1434-项目结构)
+            - [1.4.3.5. 热重载](#1435-热重载)
+    - [1.5. 构建工具](#15-构建工具)
+    - [1.6. HTTP 相关](#16-http-相关)
+        - [1.6.1. 服务器状态码](#161-服务器状态码)
+        - [1.6.2. 跨域](#162-跨域)
+        - [1.6.3. 从输入 url 到看到页面的详细过程](#163-从输入-url-到看到页面的详细过程)
+    - [1.7. 性能优化](#17-性能优化)
+    - [1.8. 前端安全](#18-前端安全)
+    - [1.9. 其他](#19-其他)
 
 <!-- /TOC -->
 
-## HTML
+## 1.1. HTML
 
-### 获取标签宽度
+### 1.1.1. 获取标签宽度
 
 HTMLElement.offsetWidth  
  [参考链接](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetWidth "获取标签宽度")
 
-### DOM 的 property 和 Attribute 区别
+### 1.1.2. DOM 的 property 和 Attribute 区别
 
 - property 是 js 中对象中的标准属性,DOM.className
 - Attribute 是标签文档中的属性,比如 DOM.getAttribute('href')
 
-### 给标签添加自定义属性
+### 1.1.3. 给标签添加自定义属性
 
 ```html
 需要在前面加上'data-'，比如：
 
 <a data-mid='2'>加上一个mid自定义属性</a>
 ```
+### 1.1.4. 自动补全属性autocomplete
+可以用于信用卡💳自动补全等
 
-## CSS
+## 1.2. CSS
 
-### 去除所有情况下 a 标签的下划线
+### 1.2.1. 去除所有情况下 a 标签的下划线
 
 ```css
 a {
@@ -86,7 +89,7 @@ a:link {
 }
 ```
 
-### position：static/absolute/relative
+### 1.2.2. position：static/absolute/relative
 
 - static: 默认值，无特殊定位，对象遵循 HTML 原则;
 - absolute:  
@@ -94,7 +97,7 @@ a:link {
 - relative:  
    相对定位，对象不可层叠，将依据 right，top，left，bottom（相对定位）等属性在正常文档流中偏移位置(相对于谁呢？相对于它自己本身，即是在原来位置上偏移，而且注意原有位置就是在保留的);
 
-### 隐藏多余溢出文字并显示省略号的样式
+### 1.2.3. 隐藏多余溢出文字并显示省略号的样式
 
 ```css
 overflow: hidden;
@@ -102,13 +105,13 @@ white-space: nowrap;
 text-overflow: ellipsis;
 ```
 
-### a 标签点击失效
+### 1.2.4. a 标签点击失效
 
 可能的原因是层级问题，被覆盖，解决办法设置定位 position:relative 和 z-index
 
-### :hover 改变其他元素样式时，只对子元素和相邻的兄弟元素有作用
+### 1.2.5. :hover 改变其他元素样式时，只对子元素和相邻的兄弟元素有作用
 
-### sass 学习笔记
+### 1.2.6. sass 学习笔记
 
 - Sass 允许将一套 CSS 样式嵌套进另一套样式中，内层的样式将它外层的选择器作为父选择器
 
@@ -293,17 +296,17 @@ p {
 }
 ```
 
-### Element UI
+### 1.2.7. Element UI
 
-#### el-popover
+#### 1.2.7.1. el-popover
 
 如果依赖的 dom 节点在它本身渲染之后出现，el-popover 将找不到相对定位的点，视图  则会出现在左上角。  
  可能导致的场景：使用 v-if，一开始有依赖 dom 节点，后来 dom 节点清除掉，然而 el-popover 只是设置为 display:none。当 dom 节点 v-if 的条件再次为 true 时，el-popover 的渲染  会比它依赖的 dom 节点快。（ 具体原因有待深究）
 
 
-## JavaScript
+## 1.3. JavaScript
 
-### jQuery 点击事件失效
+### 1.3.1. jQuery 点击事件失效
 
 - 使用 $("#id").click(function(){ }); 有时会失效  
    原因：  
@@ -320,7 +323,7 @@ $(document).on("click", "#id", function() {
 将事件绑定在 document DOM 树下，当事件到达#id 元素时，事件程序被执行，由于是从整个 document 下寻找的，可以保证事件被触发  
 [参考链接](https://stackoverflow.com/questions/14879168/document-onclick-id-function-vs-id-onclick-function "jQuery $(#id).click 和 $(document).on(click,#id,function(){ })区别")
 
-### if 语句为 false 的几种情况：
+### 1.3.2. if 语句为 false 的几种情况：
 
 - 数字 0
 - 非数字 NaN
@@ -329,7 +332,7 @@ $(document).on("click", "#id", function() {
 - 没有定义 undefined
 - false 本身
 
-### js 发生异步的情况：需要等待
+### 1.3.3. js 发生异步的情况：需要等待
 
 等待的场景有：
 
@@ -339,11 +342,11 @@ $(document).on("click", "#id", function() {
 
 [博客整理](http://blog.csdn.net/lizhenqii/article/details/77806681 "博客整理")
 
-### 防止浏览器缓存
+### 1.3.4. 防止浏览器缓存
 
     链接加上一个随机数，比如js中用Math.random()
 
-### BOM 常见操作
+### 1.3.5. BOM 常见操作
 
 1. 判断浏览器类型 navigator
 
@@ -378,14 +381,14 @@ history.back();
 history.forward();
 ```
 
-### js 获取随机数，要求长度一致的字符串格式
+### 1.3.6. js 获取随机数，要求长度一致的字符串格式
 
 ```javascript
 var random = Math.random() + "0000000000"; //使用Math random 获取随机数，再加上10位0
 var random = random.slice(0, 10); //截取前10位
 ```
 
-### 使用 XMLHttpRequest 写一个简单的 ajax 请求(暂未兼容 IE)
+### 1.3.7. 使用 XMLHttpRequest 写一个简单的 ajax 请求(暂未兼容 IE)
 
 ```javascript
 xhr = new XMLHttpRequest(); //新建对象
@@ -412,14 +415,14 @@ xhr.send(null);
 
 [可参考文章](http://blog.csdn.net/liujiahan629629/article/details/17126727 "可参考文章")
 
-### cookie 和 sessionStorage localStorage 区别
+### 1.3.8. cookie 和 sessionStorage localStorage 区别
 
 - 容量：cookie 大小只有 4KB，sessionStorage 和 localStorage 有 5MB
 - 请求携带：所有 http 请求都要到上 cookie，影响效率
 - API 易用性：cookie 简单，需要封装，document.cookie = …  
   其他两个简单易用，如 localStorage.getItem(key) localStorage.setItem(key, value)
 
-### 监听页面加载完的两种形式
+### 1.3.9. 监听页面加载完的两种形式
 
 - 资源全部加载完的情况
 
@@ -437,7 +440,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 ```
 
-### 国外信用卡格式
+### 1.3.10. 国外信用卡格式
 
 ```javascript
 defaultFormat = /(\d{1,4})/g;
@@ -549,7 +552,7 @@ cards = [
 ];
 ```
 
-### Promise
+### 1.3.11. Promise
 
 一个简单的例子：
 
@@ -628,7 +631,7 @@ Promise 嵌套：
   50
 ```
 
-### ES7
+### 1.3.12. ES7
 
 ES7 主要增加了两项内容：幂运算(\*\*) 和 Array.prototype.includes
 
@@ -647,7 +650,7 @@ ES7 主要增加了两项内容：幂运算(\*\*) 和 Array.prototype.includes
   [("a", "b", "c")].indexOf("a") > -1; //true
 ```
 
-### ES8
+### 1.3.13. ES8
 
 [可参考](https://blog.csdn.net/lihefei_coder/article/details/75068578, "ECMAScript规范第8版(ES2017)已发布，新功能一览")
 ES8 主要增加：
@@ -659,18 +662,18 @@ ES8 主要增加：
 - 函数参数列表与调用中的尾部逗号
 - 共享内存和原子（Shared memory and atomics）
 
-## Vue 相关
+## 1.4. Vue 相关
 
-### 关于 vue.js
+### 1.4.1. 关于 vue.js
 
-#### 关于 watch 和 computed
+#### 1.4.1.1. 关于 watch 和 computed
 
 - 尽可能不要修改 wacth 和 computed 的值，避免造成死循环。
 - wacth 想监听对象内部属性变化时，可以使用 deep：true 或者 换成字符串格式监听：obj.a -> 'obj.a'，推荐使用后者
 - 当 app 里面的任意属性发生变化时，template 会重新渲染。当 template 是通过 computed 方法获取值时，只有 computed 监听的属性发生变化时，才会重新调用函数，否则 computed 会取缓存里面的值；当 template 是通过 methods 里面的方法获取值时，只要 app 的任意属性发生变化，都会调用函数。所以，template 相对于通过 methods 里面的方法获取值，通过 computed 获取值性能会更高。
 - computed 里面定义的属性，如果在 template<font color="red">没有引用</font>，不会触发改属性的  监听
 
-### 关于 vue-router
+### 1.4.2. 关于 vue-router
 
 [参考 vue-router 官网](https://router.vuejs.org/zh/ "vue-router官网")
 
@@ -934,11 +937,11 @@ const router = new VueRouter({
   const Baz = () => import(/* webpackChunkName: "group-foo" */ "./Baz.vue");
   ```
 
-### 关于 vuex
+### 1.4.3. 关于 vuex
 
 [参考 Vuex 官网](https://vuex.vuejs.org/zh/ "Vuex官网")
 
-#### 核心概念
+#### 1.4.3.1. 核心概念
 
 ```javascript
   const store = new Vuex.Store({
@@ -1003,16 +1006,16 @@ const router = new VueRouter({
   })
 ```
 
-#### 模块化(待补充)
+#### 1.4.3.2. 模块化(待补充)
 
-#### 辅助函数
+#### 1.4.3.3. 辅助函数
 
 - mapState
 - mapGetters
 - mapMutations
 - mapActions
 
-#### 项目结构
+#### 1.4.3.4. 项目结构
 
 ```
   ├── index.html
@@ -1033,7 +1036,7 @@ const router = new VueRouter({
           └── products.js   # 产品模块
 ```
 
-#### 热重载
+#### 1.4.3.5. 热重载
 
 ```javascript
   // store.js
@@ -1072,18 +1075,18 @@ const router = new VueRouter({
   }
 ```
 
-## 构建工具
+## 1.5. 构建工具
 
-## HTTP 相关
+## 1.6. HTTP 相关
 
-### 服务器状态码
+### 1.6.1. 服务器状态码
 
 - 2xx - 请求成功，如 200
 - 3xx - 需要重定向，服务器直接跳转
 - 4xx - 客户端请求错误，如：找不到请求资源 404
 - 5xx - 服务器端错误
 
-### 跨域
+### 1.6.2. 跨域
 
 - 跨域原因：浏览器有同源策略，不执行其他源网站的脚本
 - 同源条件：协议、域名、端口都要相同
@@ -1093,7 +1096,7 @@ const router = new VueRouter({
 - jsonp 利用 script 标签中 src 属性能够跨域访问的特性，先定义了一个回调方法，然后将其当作 url 参数的一部分发送到服务端，服务端通过字符串拼接的方式将数据包裹在回调方法中，再返回回来
 - 服务器端设置 http header
 
-### 从输入 url 到看到页面的详细过程
+### 1.6.3. 从输入 url 到看到页面的详细过程
 
 主要有两个过程
 
@@ -1102,7 +1105,7 @@ const router = new VueRouter({
   5.  遇到 script 会发生阻塞，先执行 JavaScript 的内容，因为 js 可以改变 DOM 节点和结构  
       备注：第 1、2、3 步没有固定顺序，如果已经渲染 CSSOM，在渲染 html 时，会即时渲染成 RenderTree
 
-## 性能优化
+## 1.7. 性能优化
 
 - 优化原则
 
@@ -1119,7 +1122,7 @@ const router = new VueRouter({
 
 [博客整理](http://blog.csdn.net/lizhenqii/article/details/77856311 "博客整理")
 
-## 前端安全
+## 1.8. 前端安全
 
 - XSS 跨站脚本攻击  
   恶意攻击者往 Web 页面里插入恶意 Script 代码，当用户浏览该页之时，嵌入其中 Web 里面的 Script 代码会被执行，从而达到恶意攻击用户的目的。  
@@ -1135,4 +1138,4 @@ const router = new VueRouter({
 例子：发钓鱼邮件，点击付款  
 防范：增加验证流程，如输入指纹、密码、短信验证码
 
-## 其他
+## 1.9. 其他
