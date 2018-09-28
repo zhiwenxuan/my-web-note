@@ -173,6 +173,13 @@ PING mozilla.org (63.245.215.20): 56 data bytes
 <time datetime="2016-W04">The fourth week of 2016</time>
 ```
 
+- 标示删除的文本del
+```html
+<p><del>This text has been deleted</del>, here is the rest of the paragraph.</p>
+<del ><p >This paragraph has been deleted.</p ></del >
+```
+
+- 标示插入的文本ins
 
 ## CSS
 
