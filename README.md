@@ -10,6 +10,7 @@
         - [自动补全属性autocomplete](#自动补全属性autocomplete)
         - [HTML高级文字格式](#html高级文字格式)
     - [CSS](#css)
+        - [一些有趣属性收集](#一些有趣属性收集)
         - [去除所有情况下 a 标签的下划线](#去除所有情况下-a-标签的下划线)
         - [position：static/absolute/relative](#positionstaticabsoluterelative)
         - [隐藏多余溢出文字并显示省略号的样式](#隐藏多余溢出文字并显示省略号的样式)
@@ -182,6 +183,49 @@ PING mozilla.org (63.245.215.20): 56 data bytes
 - 标示插入的文本ins
 
 ## CSS
+
+### 一些有趣属性收集
+
+[所有属性集](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference)
+
+```
+background-clip：设置元素的背景（背景图片或颜色）是否延伸到边框下面。
+  background-clip: border-box
+  background-clip: padding-box
+  background-clip: content-box
+  background-clip: inherit
+
+background-origin： 规定了指定背景图片background-image 属性的原点位置的背景相对区域.
+
+border-image： CSS属性允许在元素的边框上绘制图像
+
+calc() ： 你就可以通过计算来决定一个CSS属性的值
+
+inherit：继承
+
+initial : 是将属性的初始值( initial value)赋给元素 
+
+:invalid ： CSS 伪类 表示任意内容未通过验证的 <input> 或其他 <form> 元素
+  /* 可选定任意无效的<input> */
+  input:invalid {
+    background-color: pink;
+  }
+
+filter： CSS滤镜，提供的图形特效，像模糊，锐化或元素变色。过滤器通常被用于调整图片，背景和边界的渲染。
+
+linear-gradient() : 此函数用于创建一个表示两种或多种颜色线性渐变的图片
+
+mask: 允许使用者通过部分或者完全隐藏一个元素的可见区域
+
+:read-only : 伪类 表示元素不可被用户编辑的状态（如锁定的文本输入框）
+
+transform : 允许你修改CSS视觉格式模型的坐标空间。使用它，元素可以被转换（translate）、旋转（rotate）、缩放（scale）、倾斜（skew)
+
+transition: 过渡
+
+
+
+```
 
 ### 去除所有情况下 a 标签的下划线
 
