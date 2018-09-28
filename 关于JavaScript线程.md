@@ -294,3 +294,7 @@ JavaScript 为了避免复杂性，而实现单线程执行。而如今 JavaScri
  4. [Concurrency model and Event Loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop)
  5. [也谈setTimeout](http://imweb.io/topic/56642e21d91952db73b41f52)
  6. [单线程的Javascript](https://leohxj.gitbooks.io/front-end-database/content/theory/single-thread.html)
+
+
+  [1]: http://images.51cto.com/files/uploadimg/20090804/1503300.jpg
+  [2]: https://developer.mozilla.org/files/4617/default.svg
