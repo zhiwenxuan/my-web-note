@@ -20,6 +20,7 @@
         - [Element UI](#element-ui)
             - [el-popover](#el-popover)
     - [JavaScript](#javascript)
+        - [js四舍五入保留两位小数](#js四舍五入保留两位小数)
         - [jQuery 点击事件失效](#jquery-点击事件失效)
         - [if 语句为 false 的几种情况：](#if-语句为-false-的几种情况)
         - [js 发生异步的情况：需要等待](#js-发生异步的情况需要等待)
@@ -456,6 +457,12 @@ p {
 
 
 ## JavaScript
+
+### js四舍五入保留两位小数
+Math.round会四舍五入保留整数，利用这个特性，先乘上100取整，再除以100就可以四舍五入保留两位小数
+```js
+Math.round(number * 100) / 100
+```
 
 ### jQuery 点击事件失效
 
