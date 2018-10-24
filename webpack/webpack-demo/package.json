@@ -1,0 +1,15 @@
+{
+  "name": "webpack-demo",
+  "version": "1.0.0",
+  "description": "webpack demo",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
+  },
+  "author": "zhenqi.li",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
+  }
+}
