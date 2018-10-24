@@ -1,0 +1,78 @@
+<!--
+/*
+ * @Author: zhenqi.li
+ * @Email: 1045875816@qq.com
+ * @Date: 2018-10-24 18:01:49
+ * @LastEditors: zhenqi.li
+ * @LastEditTime: 2018-10-24 18:31:59
+ * @Description: flex 实现圣杯布局（header， main footer， main： nav， middle， aside）
+ */
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html, body{
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+        }
+        .HolyGrail-body {
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            flex: 0 0 56px;
+            background: #30b44e;
+        }
+        .main {
+            flex: 1 1 auto;
+            background: #fff;
+            display: flex;
+        }
+        .nav {
+            flex: 0 0 120px;
+            background: #eee;
+        }
+        .container {
+            display: flex;
+            flex: 1 1 auto;
+            background: #fff;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+        }
+        .aside {
+            flex: 0 0 120px;
+            background: #eee;
+        }
+        .footer {
+            flex: 0 0 48px;
+            background: #30b44e;
+        }
+    </style>
+</head>
+<body class="HolyGrail-body">
+    <div class="header">
+
+    </div>
+    <div class="main">
+        <div class="nav">
+
+        </div>
+        <div class="container">
+           <p>圣杯布局</p>
+        </div>
+        <div class="aside">
+
+        </div>
+    </div>
+    <div class="footer">
+
+    </div>
+</body>
+</html>
