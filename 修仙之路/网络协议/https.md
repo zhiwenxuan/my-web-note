@@ -32,8 +32,6 @@ HTTPS = HTTP + 加密 + 认证 + 数据完整性保护
 采用混合加密算法，综合利用对称加密的效率高和非对称加密的安全性，首先使用‘非对称加密’来分发‘对称加密’的秘钥，之后的通信都使用对称加密来进行。
 
 ### 大体流程
-一个大致的图：
-![HTTPS原理大体流程图](https://user-gold-cdn.xitu.io/2018/5/21/1638197d96d391ca?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
 
 #### 准备阶段：  
 1. 服务器向第三认证机构CA(Certificate Authority)请求签名证书
@@ -41,6 +39,11 @@ HTTPS = HTTP + 加密 + 认证 + 数据完整性保护
 3. 第三认证机构用自己的私钥将服务器的公钥和服务器的信息进行加密，形成签名证书，最后颁发给服务器
 
 #### 正式阶段：  
+
+一个大致的图：  
+
+![HTTPS原理大体流程图](https://user-gold-cdn.xitu.io/2018/5/21/1638197d96d391ca?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+
 1. 浏览器请求服务器的公钥
 2. 服务器发送‘公钥A’以及认证机构CA签发的‘签名证书B'
 3. 浏览器用预装好的‘认证机构CA的公钥’对服务器发过来的‘签名证书B’进行解密，将解密出来的公钥信息和从服务器收到的公钥信息进行对比验证。
@@ -62,7 +65,7 @@ HTTPS = HTTP + 加密 + 认证 + 数据完整性保护
 
 
 ## 可参考文章
-[白话解释 对称加密算法 VS 非对称加密算法](https://segmentfault.com/a/1190000004461428)
-[大型网站的HTTPS实践（一）——HTTPS协议和原理](https://mp.weixin.qq.com/s/estsNq9lVrLhR__ShtX22Q)
-[看图学HTTPS](https://juejin.im/post/5b0274ac6fb9a07aaa118f49)
-[HTTPS系列1——HTTPS三次握手](https://www.zybuluo.com/blueGhost/note/805491)
+[白话解释 对称加密算法 VS 非对称加密算法](https://segmentfault.com/a/1190000004461428)  
+[大型网站的HTTPS实践（一）——HTTPS协议和原理](https://mp.weixin.qq.com/s/estsNq9lVrLhR__ShtX22Q)  
+[看图学HTTPS](https://juejin.im/post/5b0274ac6fb9a07aaa118f49)  
+[HTTPS系列1——HTTPS三次握手](https://www.zybuluo.com/blueGhost/note/805491)  
