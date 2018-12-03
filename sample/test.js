@@ -75,3 +75,35 @@ function throttleDebounce(handler, interval) {
     }
 }
 window.addEventListener('scroll', throttleDebounce(print, 100));
+
+//手动实现Strin.prototype.trim()
+String.prototype.myTrim = function() {
+    //输入校验，排除非字符串
+    if(Object.prototype.toString.call(this) !== '[object String]'){
+        return this;
+    }
+    let length = this.length;
+    let beginInd = 0, endInd = 0;
+    for(let i = 0; i < length; i++) {
+        if(this[i] !== ' '){
+            beginInd = i;
+            break;
+        }
+    }
+    if(beginInd === 0 && this[0] === ' '){
+        return '';
+    }
+    for(let i = length - 1; i >= beginInd; i--) {
+        if(this[i] !== ' '){
+            endInd = i;
+            break;
+        }
+    }
+    return this.slice(beginInd, endInd + 1);
+}
+let str = '     Hello Wolrd    ';
+str.myTrim();
+
+
+
+
