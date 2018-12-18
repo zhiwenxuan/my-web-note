@@ -36,4 +36,42 @@
 
 19. 有一个versions是一个项目的版本号列表，因多人维护，
     不规则var versions = ['1.45.0', '1.5', '6', '3.3.3.3.3.3'],要求从小到大排序，注意‘1.45’比‘1.5’大， 排序结果： ['1.5', '1.45.0', '3.3.3.3.3.3', '6']
-20. 
+
+
+
+
+20. lazyman（eat, sleep, go, rest）:链式调用
+21. setCookie
+22. async/await promise setTimeout顺序
+```js
+new Promise(function(resolve) {
+    console.log("promise1");
+    resolve();
+}).then(function() {
+    console.log("promise2");
+});
+async function async1() {
+    console.log("async1 start");
+    await async2();
+    console.log("async1 end");
+}
+
+async function async2() {
+    console.log("async2");
+}
+
+console.log("script start");
+
+setTimeout(function() {
+    console.log("setTimeout");
+}, 0);
+
+async1();
+
+
+
+console.log("script end");
+```
+23. service worker
+24. BFC
+25. 两个相邻的DIV，设置z-index
