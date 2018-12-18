@@ -124,15 +124,15 @@ server {
 在Value标签中增加属性： protocolHeader="X-Forwarded-Proto" 
 
 ### 总结
-几个核心点：
-1. 下载crt文件时，选择Apache服务器
+几个核心点：
+1. 下载crt文件时，选择Apache服务器
 2. 要合并两个crt文件
-3. 要生成解密的key文件，避免重启Nginx输密码
+3. 要生成解密的key文件，避免重启Nginx输密码
 4. Tomcat的配置
 
 ### 参考
 [Amazon EC2 + Tomcat + Ngnix + Godaddy 配置HTTPS](https://blog.csdn.net/lizhenqii/article/details/84960521)  
 [购买ssl](https://sg.godaddy.com/zh/web-security/ssl-certificate)  
 [生成解密key](https://segmentfault.com/q/1010000000119345)  
-[修改Nginx和Tomcat配置](https://www.jianshu.com/p/19f05fdd292b)  
+[修改Nginx和Tomcat配置](https://www.jianshu.com/p/19f05fdd292b)  
 [下载crt文件](https://sg.godaddy.com/zh/help/ssl-4754)  
