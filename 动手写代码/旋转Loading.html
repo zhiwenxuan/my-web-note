@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        #demo {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: block;
+            width: 20px;
+            height: 20px;
+            border-top: 2px solid blue;
+            border-radius: 50%;
+            animation-duration: 1.5s;
+            animation-name: loading;
+            animation-iteration-count: infinite;
+        }
+        @keyframes loading {
+            from {
+                transform: rotate(0)
+            }
+            to {
+                transform: rotateZ(360deg)
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="demo">
+        <span class="loading"></span>
+    </div>
+</body>
+</html>
