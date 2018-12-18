@@ -28,7 +28,7 @@
 
 ## csrf攻击特征
 ![csrf攻击特征](https://raw.githubusercontent.com/zhiwenxuan/My_web_note/master/img/csrf-attack-features.png)
-1. 想A网站发送请求并携带A网站的身份（一般是cookie ）
+1. 向A网站发送请求并携带A网站的身份（一般是cookie ）
 2. 不经过A网站前端发送请求
 3. HTTP referer头指向B网站（攻击网站）
 
