@@ -4,7 +4,7 @@
 跨站请求攻击（Cross-Site Request Forgery），简单地说，是攻击者通过一些技术手段欺骗用户的浏览器去访问一个自己曾经认证过的网站并运行一些操作（如发邮件，发消息，甚至财产操作如转账和购买商品）。由于浏览器曾经认证过，所以被访问的网站会认为是真正的用户操作而去运行。这利用了web中用户身份验证的一个漏洞：简单的身份验证只能保证请求发自某个用户的浏览器，却不能保证请求本身是用户自愿发出的。
 
 ## csrf攻击原理
-![csrf攻击原理](https://raw.githubusercontent.com/zhiwenxuan/My_web_note/master/img/csrf-principle.png)
+![csrf攻击原理](https://raw.githubusercontent.com/zhiwenxuan/my-web-note/master/img/csrf-principle.png)
 1. 用户登录A网站
 2. A网站验证用户身份
 3. B网站向A网站发送请求（携带A网站的身份），这一步一般是用户访问了B网站（恶意网站），然后不知情的情况下触发了请求。
@@ -27,7 +27,7 @@
 
 
 ## csrf攻击特征
-![csrf攻击特征](https://raw.githubusercontent.com/zhiwenxuan/My_web_note/master/img/csrf-attack-features.png)
+![csrf攻击特征](https://raw.githubusercontent.com/zhiwenxuan/my-web-note/master/img/csrf-attack-features.png)
 1. 向A网站发送请求并携带A网站的身份（一般是cookie ）
 2. 不经过A网站前端发送请求
 3. HTTP referer头指向B网站（攻击网站）

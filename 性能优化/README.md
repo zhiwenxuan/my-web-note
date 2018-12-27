@@ -26,7 +26,7 @@
 二。 浏览器层面
 
 ## 实战
-![性能优化](https://raw.githubusercontent.com/zhiwenxuan/My_web_note/master/img/performance-optimize.jpeg
+![性能优化](https://raw.githubusercontent.com/zhiwenxuan/my-web-note/master/img/performance-optimize.jpeg
 )
 
 ### Webpack性能优化

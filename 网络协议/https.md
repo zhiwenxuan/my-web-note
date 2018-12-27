@@ -30,7 +30,7 @@ HTTPS = HTTP + 加密 + 认证 + 数据完整性保护
 采用混合加密算法，综合利用对称加密的效率高和非对称加密的安全性，首先使用‘非对称加密’来分发‘对称加密’的秘钥，之后的通信都使用对称加密来进行。
 
 ## HTTPS 原理
-![HTTPS原理图](https://raw.githubusercontent.com/zhiwenxuan/My_web_note/master/img/https-principle.png)
+![HTTPS原理图](https://raw.githubusercontent.com/zhiwenxuan/my-web-note/master/img/https-principle.png)
 
 ### 服务器请求数字证明：  
 ![证书数字签名](https://user-gold-cdn.xitu.io/2018/5/21/1638197d961729a3?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)  
@@ -41,7 +41,7 @@ HTTPS = HTTP + 加密 + 认证 + 数据完整性保护
 ### 大体流程：  
 
 
-![HTTPS原理大体流程图](https://raw.githubusercontent.com/zhiwenxuan/My_web_note/master/img/https-short-principle.png)
+![HTTPS原理大体流程图](https://raw.githubusercontent.com/zhiwenxuan/my-web-note/master/img/https-short-principle.png)
 
 
 第一步，浏览器请求公钥，请求报文包含：加密协议版本号（如：TSL1.0）、一个浏览器生成的随机数（Client random），以及浏览器支持的加密方法。
