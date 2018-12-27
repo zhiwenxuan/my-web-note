@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Minimum number of circles with radius r to cover n points</title>
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <h2>Minimum number of circles with radius r to cover n points</h2>
+    <canvas id="c" style="width:600px;height: 600px;border: 1px solid #ccc" width="600" height="600"></canvas>
+    <div id="result" style="height: 64px; line-height: 64px; color: aqua;font-size: 18px;"></div>
+</body>
+<script>
+// 问题描述：地图上有N个点，求至少需要多少个半径为R的圆，才能把所有的点覆盖住。
+// 参考：https://stackoverflow.com/questions/15882202/minimum-number-of-circles-with-radius-r-to-cover-n-points
+
+( function () {
+    //点的数目
+    var POINTS_NUMBER = 30;
+    //每个圆的半径
+    var RADIUS = 50;
+    //每个点需要配备的圆的数目，原则上，数目越大，越有可能得到最优解，目前的调参是1000
+    var SAMPLE_PER_POINT = 1000;
+
+    var canvas = document.getElementById("c");
+    var ctx = canvas.getContext("2d");
+    /**
+     point: {
+         x,
+         y,
+         covered: false, //是否被覆盖了
+         circles: [] //覆盖自己的圆列表
+     }
+    */
+    var points = [];
+     
+    /**
+     circle: {
+         x,
+         y,
+         insideCount: 0, //自己覆盖的有效点（没有被覆盖的）的数目
+         inside: [] //自己覆盖的点的列表
+     }
+    */
+    var circles = [];
+
+    //初始化数据-点
+    var initPoints = function () {
+        // points = JSON.parse(localStorage.getItem('points')); 
+        for(var i = 0; i < POINTS_NUMBER; i+=1) {
+            var x =  Math.floor((Math.random() * 400) + 1 + 100);
+            var y =  Math.floor((Math.random() * 400) + 1 + 100);
+            points.push({x:x,y:y, covered: false,circles:[]})
+        }
+        localStorage.setItem('points', JSON.stringify(points));
+    }
+    //画点
+    var drawPoints = function () {
+        for(var i = 0; i < POINTS_NUMBER; i+=1) {
+            var x =  points[i].x;
+            var y =  points[i].y;
+            var radius = 3;
+            drawSingleCircle(x, y, radius, 'green', '#003300');
+        }
+    }
+
+    // 初始化圆数据
+    var initCircles = function () {
+        for(var i = 0; i < POINTS_NUMBER; i+=1) {
+            var p = points[i];
+            // Foreach point generate SAMPLE_PER_POINT circles in random distance less than R 
+            // from point (radius of circle so we are sure that for each circle at least one point 
+            // belongs to it and each point belongs to at least one circle)
+            //译：在距离p点不超过距离为R的范围随机生成 SAMPLE_PER_POINT 个圆（这样可以保证每个点至少有一个圆，每个圆至少有一个点）
+            //核心： 以p点为中心，尽可能扩散，尽可能囊括其他点进来， 目前扩散范围是 SAMPLE_PER_POINT ， 贪心算法思想，不一定得到最优解
+            for(var j = 0; j < SAMPLE_PER_POINT; j+=1) {
+                var r = Math.random() * RADIUS;
+                var fi = Math.random() * 2 * Math.PI;
+                var x = p.x + r * Math.cos(fi);
+                var y = p.y + r * Math.sin(fi);
+                circles.push({x: x, y: y})
+            }
+        }
+    }
+
+    //画所有圆
+    var drawCircles = function() {
+        for(var i = 0; i < circles.length; i+=1) {
+            var c = circles[i];
+            drawSingleCircle(c.x, c.y, RADIUS);
+        }
+    }
+    //画单个圆
+    var drawSingleCircle = function (x, y, r, bgColor = 'transparent', borderColor = '#aa0000') {
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, 2 * Math.PI, false);
+        ctx.fillStyle = bgColor;
+        ctx.fill();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = borderColor;
+        ctx.stroke();
+    }
+    // 判断两个点是否能同时在同一个圆里面
+    var isInside = function(p1,p2) {
+        return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2)) < RADIUS
+    }
+
+    //去掉多余的圆, 分两步：
+    // 第一步： 完善 points 和 circles 的数据
+    // 第二步：从覆盖有效点最多的圆开始，如果包含有效点（没有被标记过的），则加入，否则去除
+    var getResult = function () {
+        var newCircles = []
+        // 第一步： 完善 points 和 circles 的数据
+        for(var i = 0; i < circles.length; i += 1) {
+            var c = circles[i];
+            c.inside = [];
+            c.insideCount = 0;
+            for(var j = 0; j < points.length; j += 1) {
+                if(isInside(c, points[j])) {
+                    //把覆盖的点记录下来
+                    c.inside.push(points[j]);
+                    c.insideCount +=1;
+                    //把覆盖自己的圈记录下来
+                    points[j].circles.push(c);
+                }
+            }
+            //如果有覆盖点，则加入
+            if(c.inside.length > 0){
+                newCircles.push(c);
+            }
+        }
+        circles = newCircles;
+
+        // 第二步：进一步优化，去掉多余的圆
+        newCircles = [];
+        var count = 0; // 已经被标记的点的数目，退出循环的判断依据
+        while(true){
+            // get circle with max insideCount
+            //找到覆盖最多点的圈 （覆盖点最多的，优先级最高）
+            var c = circles[0];
+            for(var i = 0; i < circles.length; i += 1) {
+                if(c.insideCount < circles[i].insideCount) {
+                    c = circles[i];
+                }
+            }
+            var any = false;
+            for(var j = 0; j < c.inside.length; j += 1) {
+                // 还没有标记，说明这个圆是有效的
+                if(!c.inside[j].covered) {
+                    any = true;
+                    c.inside[j].covered = true
+                    count += 1;
+                    //这个点已经被标记marked，覆盖这个点的圆的insideCount(记录自己覆盖点的数目)都要减1
+                    for(var k = 0; k < c.inside[j].circles.length; k += 1) {
+                        c.inside[j].circles[k].insideCount -= 1;
+                    }
+                }
+            }
+            //有覆盖点，有效圆
+            if(any) {
+                newCircles.push(c);
+            }
+            //所有的点都被标记，即所有的点有圆覆盖，程序结束
+            if(count == points.length){
+                break; // finish if all counted
+            }
+        
+        }
+        //最后的结果
+        circles = newCircles;
+    }
+    //begin
+    //初始化点的数据
+    initPoints();
+    //初始化圆的数据
+    initCircles();
+    //获取最终的圆
+    getResult();
+    //展示
+    drawPoints();
+    drawCircles();
+    document.getElementById('result').innerText = `需要圆的数目：${circles.length}`;
+})();
+</script>
+</html>
