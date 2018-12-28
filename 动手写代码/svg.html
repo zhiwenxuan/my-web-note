@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SVG Practice</title>
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .svg-w {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: auto;
+            animation: translate 4s linear infinite;
+        }
+        .plane {
+            margin-left: -50px;
+            /* animation: pilot-r 1.5s infinite; */
+
+        }
+        .glass {
+            animation: rotate 2.25s 1.2s infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotateY(-360deg);
+            }
+            50% {
+                transform: rotateY(360deg);
+            }
+            100% {
+                transform: rotateY(-360deg);
+            }
+        }
+        @keyframes translate {
+            0% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-200px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        @keyframes pilot-r {
+            0% {
+                transform: rotateY(-360deg) translateX(-25px);
+            }
+            50% {
+                transform: rotateY(360deg) translateX(-25px);
+            }
+            100% {
+                transform: rotateY(-360deg) translateX(-25px);
+            }
+        }
+    </style>
+</head>
+<body>  
+        <div class="svg-w">
+            <svg class="plane" width="111" height="64" viewBox="0 0 111 64" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><ellipse fill="#D6D4FC" fill-rule="nonzero" cx="10.78" cy="27.309" rx="10.221" ry="10.222"/><ellipse fill="#D6D4FC" fill-rule="nonzero" cx="73.329" cy="9.033" rx="37.07" ry="9.033"/><path d="M44.129 10.859c-1.084-1.007-3.386-4.737 6.646-7.158A46.452 46.452 0 0 1 57.49 2.8c2.33 0-4.198.622-5.212 1.854-1.014 1.231 3.659-.504 5.303-.574 1.644-.07-4.897 1.12-7.696 3.38-1.63 1.308-1.329 3.645 2.659 4.736 3.987 1.092-.07 1.008-1.987.322-1.917-.685-3.876-2.63-3.91-2.337-.127 1.127 3.28 3.051 4.449 3.702.72.405-4.023-.301-6.968-3.023zm60.394-3.631c.945 1.133 2.526 4.47-7.828 6.549 0 0-5.68.7-7.99.385-2.308-.315 5.17-.7 6.346-1.764 1.175-1.063-3.694 0-5.338-.112-1.644-.112 4.995-.475 8.08-2.358 1.784-1.091 2.015-4.198-2.028-5.037-4.247-.917.119-.812 2.007-.063 2.75 1.091 3.365 3.022 3.575 2.799 1.49-1.456-1.595-3.1-3.274-3.75-.762-.28 3.89.272 6.45 3.35z" fill="#7D62F1" fill-rule="nonzero"/><path stroke="#033265" stroke-width=".77" stroke-linecap="round" stroke-linejoin="round" d="M72.245 26.217l1.091-16.303 4.415 16.303"/><path d="M89.14 39.448l-70.79-4.653a8.095 8.095 0 0 1-7.563-8.081.51.51 0 0 1 .51-.511h77.878a.51.51 0 0 1 .51.51v12.224a.51.51 0 0 1-.545.511z" stroke="#033265" stroke-width=".77" stroke-linecap="round" stroke-linejoin="round"/><path d="M56.378 24.727H93.75c8.314 0 15.055 6.741 15.055 15.057S102.065 54.84 93.75 54.84H79.576c-14.295 0-25.884-11.59-25.884-25.888v-1.56a2.666 2.666 0 0 1 2.686-2.666z" fill="#D6D4FC" fill-rule="nonzero"/><path d="M102.25 49.02H83.942a33.383 33.383 0 0 1-28.55-16.093.7.7 0 0 0-1.287.49c2.178 12.366 12.916 21.386 25.471 21.396H93.75a14.977 14.977 0 0 0 10.92-4.716.7.7 0 0 0-.587-1.19c-.583.075-1.194.113-1.833.113z" fill="#9586EA" fill-rule="nonzero"/><path d="M93.813 24.643H83.389a3.498 3.498 0 0 0-3.092 5.184 25.968 25.968 0 0 0 22.722 13.378h2.414a3.498 3.498 0 0 0 3.498-3.4v-.035c0-8.352-6.768-15.123-15.118-15.127zm-22.142 13.63h-7.394a2.96 2.96 0 0 1-2.75-1.89l-1.112-2.798a2.96 2.96 0 0 1 2.75-4.065h7.394a2.96 2.96 0 0 1 2.75 1.854l1.112 2.798a2.96 2.96 0 0 1-2.75 4.1z" fill="#7D62F1" fill-rule="nonzero"/><rect stroke="#033265" stroke-width=".77" stroke-linecap="round" stroke-linejoin="round" x="59.499" y="60.375" width="43.521" height="2.827" rx="1.413"/><path d="M70.81 60.256l2.876-7.906m19.476 7.906L91.82 52.35" stroke="#033265" stroke-width=".77" stroke-linecap="round" stroke-linejoin="round"/><circle fill="#033265" fill-rule="nonzero" cx="76.107" cy="46.207" r="1"/><circle fill="#033265" fill-rule="nonzero" cx="80.374" cy="46.207" r="1"/><circle fill="#033265" fill-rule="nonzero" cx="84.634" cy="46.207" r="1"/></g></svg>
+            <svg class="glass" width="197" height="273" viewBox="0 0 197 273" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M196.363 257.063v-84.206c0-53.884-43.666-97.57-97.542-97.585-53.886 0-97.57 43.69-97.57 97.585v84.206" stroke="#9F8CED" stroke-width=".77" stroke-linecap="round" stroke-linejoin="round"/><path d="M98.821 75.272c-53.886 0-97.57 43.69-97.57 97.585v84.206h.084c1.805 8.802 44.927 15.505 97.486 15.505 52.56 0 96.395-7.08 97.486-15.505h.056v-84.206c0-53.884-43.666-97.57-97.542-97.585z" fill-opacity=".5" fill="#E6E6FF" fill-rule="nonzero" style="mix-blend-mode:multiply"/><path d="M189.717 250.955v-78.301c0-50.629-39.736-91.54-89.678-94.597-3.016-.182-17.833.93-14.202 1.735 44.168 8.956 75.915 47.79 75.918 92.862v81.8c0 1.966-.602 8.172 5.82 7.465 7.192-.79 15.909-3.386 15.909-3.386 4.484-1.183 6.233-3.667 6.233-7.578z" fill-opacity=".5" fill="#D6D4FC" fill-rule="nonzero" style="mix-blend-mode:multiply"/><path d="M196.363 257.35c0 7.48-43.681 15.057-97.57 15.057-53.888 0-97.542-7.577-97.542-15.057m4.219-84.213v81.569m0-81.569v81.569m93.351 14.154c-52.195 0-93.351-6.633-93.351-13.882M99.65.5v75" stroke="#9F8CED" stroke-width=".77" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+        </div>
+    
+</body>
+</html>
