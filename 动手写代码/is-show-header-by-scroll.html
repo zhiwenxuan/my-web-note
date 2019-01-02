@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Is Show Header</title>
+    <style>
+        html, body {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            width: 100%;
+        }
+        .header {
+            position: fixed;
+            z-index: 1;
+            text-align: center;
+            height: 92px;
+            line-height: 92px;
+            background-color: transparent;
+            width: 100%;
+            font-size: 20px;
+        }
+        .translate-up {
+            background-color: #fff;
+            transform: translateY(0);
+            transition: all .5s linear;
+        }
+        .translate-down {
+            background-color: #fff;
+            transform: translateY(-94px);
+            transition: all .5s linear;
+        }
+        .translate-start {
+            transition: all .5s linear;
+        }
+        .main {
+            flex: 1 0 2600px;
+            text-align: center;
+        }
+        .main img {
+            width: 100%;
+        }
+        .main-t {
+            background: #eee;
+            height: 1600px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header" id="header">
+        Header Nav
+    </header>
+    <div class="main">
+        <img src="https://bees360.s3.amazonaws.com/websource/assets/img/banner1_2_origin.9db47eb.png" alt="">
+        <div class="main-t">
+            Main
+        </div>
+    </div>
+</body>
+<script>
+    /**
+     * 根据滚动方向，判断是否展示导航栏
+     * 模式1（导航栏开始位置）：背景设为透明
+     * 模式2（向上滚动）：显示导航栏
+     * 模式3（向下滚动）： 隐藏导航栏
+    */
+    //三种模式： 导航栏开始位置; 向上滚动； 向下滚动
+    const StartModeStr = 'Start', UpModeStr = 'Up', DownModeStr = 'Down';
+    var headerDom = document.getElementById('header');
+    const HeaderPlace = headerDom.offsetHeight + 30;
+    var currentYOffset, //滚动条Y轴当前位置
+        currentMode; //当前的模式
+        
+
+    //处理滚动，根据不同的模式
+    var handleScroll = function (mode) {
+        console.log(`In handleScroll：${mode}`)
+        var className = 'header';
+
+        //根据模式，赋予不同的类名
+        switch(mode) {
+            case StartModeStr:
+                className = 'header translate-start';
+                break;
+            case UpModeStr:
+                className = 'header translate-up';
+                break;
+            case DownModeStr:
+                className = 'header translate-down';
+                break;
+            default:
+                break; 
+        }
+        //更改类名
+        headerDom.className = className;
+    }
+
+    //监听滚动
+    window.onscroll = function (e) {
+        var mode = undefined;
+        var pageYOffset = window.pageYOffset;
+        
+        //第一次滚动
+        if(currentYOffset === undefined) {
+            return currentYOffset = pageYOffset;
+        }
+        //非第一次滚动
+        if(pageYOffset < HeaderPlace) { //滚动条在顶部位置
+            if(currentMode === undefined || currentMode !== StartModeStr) {
+                mode = StartModeStr
+            }
+        }else if(pageYOffset - currentYOffset > 0) { //向下滚动
+            if(currentMode === undefined || currentMode !== DownModeStr) {
+                mode = DownModeStr;
+            }
+        }else { //向上滚动
+            if(currentMode === undefined || currentMode !== UpModeStr) {
+                mode = UpModeStr;
+            }
+        }
+
+        //更新 滚动条Y轴当前位置
+        currentYOffset = pageYOffset;
+
+        //模式改变，做相应处理
+        if(mode !== undefined) {
+            handleScroll(mode);
+            currentMode = mode;
+        }
+        
+    }
+
+</script>
+</html>
