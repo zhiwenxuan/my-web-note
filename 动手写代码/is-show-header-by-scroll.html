@@ -31,6 +31,7 @@
             background-color: #fff;
             transform: translateY(0);
             transition: all .5s linear;
+            box-shadow: 0 1px 1px rgba(0,0,0,.12), 0 2px 1px rgba(0,0,0,.16);
         }
         .translate-down {
             background-color: #fff;
@@ -65,77 +66,97 @@
     </div>
 </body>
 <script>
-    /**
-     * 根据滚动方向，判断是否展示导航栏
-     * 模式1（导航栏开始位置）：背景设为透明
-     * 模式2（向上滚动）：显示导航栏
-     * 模式3（向下滚动）： 隐藏导航栏
-    */
-    //三种模式： 导航栏开始位置; 向上滚动； 向下滚动
-    const StartModeStr = 'Start', UpModeStr = 'Up', DownModeStr = 'Down';
-    var headerDom = document.getElementById('header');
-    const HeaderPlace = headerDom.offsetHeight + 30;
-    var currentYOffset, //滚动条Y轴当前位置
-        currentMode; //当前的模式
-        
+    (function() {
+        /**
+        * 根据滚动方向，判断是否展示导航栏
+        * 模式1（导航栏开始位置）：背景设为透明
+        * 模式2（向上滚动）：显示导航栏
+        * 模式3（向下滚动）： 隐藏导航栏
+        */
+        //三种模式： 导航栏开始位置; 向上滚动； 向下滚动
+        const StartModeStr = 'Start', UpModeStr = 'Up', DownModeStr = 'Down';
+        var headerDom = document.getElementById('header');
+        const HeaderPlace = headerDom.offsetHeight + 30;
+        var currentYOffset, //滚动条Y轴当前位置
+            currentMode; //当前的模式
+            
 
-    //处理滚动，根据不同的模式
-    var handleScroll = function (mode) {
-        console.log(`In handleScroll：${mode}`)
-        var className = 'header';
+        //处理滚动，根据不同的模式
+        var setHeaderClassByMode = function (mode) {
+            console.log(`In handleScroll：${mode}`)
+            var className = 'header';
 
-        //根据模式，赋予不同的类名
-        switch(mode) {
-            case StartModeStr:
-                className = 'header translate-start';
-                break;
-            case UpModeStr:
-                className = 'header translate-up';
-                break;
-            case DownModeStr:
-                className = 'header translate-down';
-                break;
-            default:
-                break; 
-        }
-        //更改类名
-        headerDom.className = className;
-    }
-
-    //监听滚动
-    window.onscroll = function (e) {
-        var mode = undefined;
-        var pageYOffset = window.pageYOffset;
-        
-        //第一次滚动
-        if(currentYOffset === undefined) {
-            return currentYOffset = pageYOffset;
-        }
-        //非第一次滚动
-        if(pageYOffset < HeaderPlace) { //滚动条在顶部位置
-            if(currentMode === undefined || currentMode !== StartModeStr) {
-                mode = StartModeStr
+            //根据模式，赋予不同的类名
+            switch(mode) {
+                case StartModeStr:
+                    className = 'header translate-start';
+                    break;
+                case UpModeStr:
+                    className = 'header translate-up';
+                    break;
+                case DownModeStr:
+                    className = 'header translate-down';
+                    break;
+                default:
+                    break; 
             }
-        }else if(pageYOffset - currentYOffset > 0) { //向下滚动
-            if(currentMode === undefined || currentMode !== DownModeStr) {
-                mode = DownModeStr;
+            //更改类名
+            headerDom.className = className;
+        }
+
+        var isShowHeader = function () {
+            var mode = undefined;
+            var pageYOffset = window.pageYOffset;
+            
+            //第一次滚动
+            if(currentYOffset === undefined) {
+                return currentYOffset = pageYOffset;
             }
-        }else { //向上滚动
-            if(currentMode === undefined || currentMode !== UpModeStr) {
-                mode = UpModeStr;
+            //非第一次滚动
+            if(pageYOffset < HeaderPlace) { //滚动条在顶部位置
+                if(currentMode === undefined || currentMode !== StartModeStr) {
+                    mode = StartModeStr
+                }
+            }else if(pageYOffset - currentYOffset > 0) { //向下滚动
+                if(currentMode === undefined || currentMode !== DownModeStr) {
+                    mode = DownModeStr;
+                }
+            }else if(pageYOffset - currentYOffset < 0) { //向上滚动
+                if(currentMode === undefined || currentMode !== UpModeStr) {
+                    mode = UpModeStr;
+                }
+            }else {
+                //滚动条不变，不用处理
+            }
+
+            //更新 滚动条Y轴当前位置
+            currentYOffset = pageYOffset;
+
+            //模式改变，做相应处理
+            if(mode !== undefined) {
+                setHeaderClassByMode(mode);
+                currentMode = mode;
             }
         }
 
-        //更新 滚动条Y轴当前位置
-        currentYOffset = pageYOffset;
-
-        //模式改变，做相应处理
-        if(mode !== undefined) {
-            handleScroll(mode);
-            currentMode = mode;
+        //节流防抖
+        function throttleDebounce(handler, interval) {
+            let timer = null;
+            let last = +new Date(); //(new Date()).getTime();
+            return function() {
+                let now = +new Date(); //(new Date()).getTime();
+                if(now - last > interval) {
+                    last = now;
+                    handler();
+                }else { //响应最后一次时间间隔的操作
+                    window.clearTimeout(timer);
+                    timer = window.setTimeout(handler, interval);
+                }
+            }
         }
-        
-    }
 
+        //监听滚动
+        window.addEventListener('scroll', throttleDebounce(isShowHeader, 100));
+    })()
 </script>
 </html>
