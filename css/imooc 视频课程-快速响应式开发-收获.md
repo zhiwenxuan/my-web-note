@@ -15,7 +15,7 @@
 
 ### px2rem
 
-在移动端中，全部使用 rem 单位。这时可以使用 px2rem 的一些插件，如：px2rem-webpack-plugin
+在移动端中，全部使用 rem 单位。这时可以使用 px2rem 的一些插件，如：px2rem-webpack-plugin，postcss-px2rem
 
 ### 调试工具
 
