@@ -114,10 +114,12 @@ console.log(obj1.getName.call(obj2)); // 输出:anne
 #### call 和 apply 的作用
 
 1. 改变 this 指向
-   call 和 apply 最常见的用途是改变函数内部的 this 指向
+
+call 和 apply 最常见的用途是改变函数内部的 this 指向
 
 2. 实现 `Function.prototype.bind`
-   call 和 apply 改变了函数的 this 上下文后便执行该函数,而 bind 则是返回改变了上下文后的一个函数。
+
+call 和 apply 改变了函数的 this 上下文后便执行该函数,而 bind 则是返回改变了上下文后的一个函数。
 
 ```js
 Function.prototype.mbind = function() {
