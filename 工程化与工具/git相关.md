@@ -34,3 +34,9 @@ Date:   Fri May 18 20:59:18 2018 +0800
 ```
 
 回退到某个版本：git reset --hard `<commit id>`
+
+删除远程分支： git push [远程名] :[分支名]
+```
+例子：
+$ git push origin :branch1
+```
