@@ -40,3 +40,13 @@ Date:   Fri May 18 20:59:18 2018 +0800
 例子：
 $ git push origin :branch1
 ```
+
+拉取远程分支 branch1
+
+```
+git fetch origin branch1 命令来把远程分支拉到本地
+
+git checkout -b branch1 origin/branch1 在本地创建分支 branch1 并切换到该分支
+
+git pull origin branch1 就可以把某个分支上的内容都拉取到本地了
+```
