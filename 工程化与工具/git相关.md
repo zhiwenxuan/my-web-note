@@ -50,3 +50,12 @@ git checkout -b branch1 origin/branch1 在本地创建分支 branch1 并切换�
 
 git pull origin branch1 就可以把某个分支上的内容都拉取到本地了
 ```
+
+撤销 rebase
+```
+// 查看引用日志
+git reflog
+
+// 回到 rebase 前
+git reset --hard HEAD@{n}
+```
