@@ -254,7 +254,7 @@ var expression = / pattern / flags;
 
 ##### 属性
 1. length 表示函数希望接收的命名参数的个数
-2. prototype 保存浏览器内置的实例方法的地方
+2. prototype 保存所有实例方法的地方
 
 ##### 方法
 1. apply()： 接收两个参数：第一个是在其中运行函数的作用域，另外一个是参数数组。第二个参数可以是Array 实例，也可以是 arguments 对象
