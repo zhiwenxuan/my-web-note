@@ -124,3 +124,18 @@ PING mozilla.org (63.245.215.20): 56 data bytes
 ```
 
 - 标示插入的文本ins
+
+### 可以展示 PDF 的标签
+```html
+<embed width="100%" height="100%" src="./example.pdf" type="application/pdf">
+
+<object type="application/pdf"
+    data="/media/examples/In-CC0.pdf"
+    width="250"
+    height="200">
+</object>
+```
+利用浏览器查看 PDF 文件时，使用的是 `embed` 。  
+具体使用可以参考：  
+https://developer.mozilla.org/en-US/docs/Web/HTML/Element/object  
+https://developer.mozilla.org/en-US/docs/Web/HTML/Element/embed
