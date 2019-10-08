@@ -28,7 +28,7 @@ Object.defineProperty(person, 'name', {
   value: 'Andy'
 })
 
-console.log(persion.name) // Andy
+console.log(person.name) // Andy
 person.name = 'Greg';
 console.log(person.name) // Andy, 非严格模式操作忽略，严格模式，复制操作将会导致抛出错误。
 ```
