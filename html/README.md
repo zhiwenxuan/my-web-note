@@ -139,3 +139,18 @@ PING mozilla.org (63.245.215.20): 56 data bytes
 具体使用可以参考：  
 https://developer.mozilla.org/en-US/docs/Web/HTML/Element/object  
 https://developer.mozilla.org/en-US/docs/Web/HTML/Element/embed
+
+### datalist：给输入框 input 提供可选项
+```html
+<label for="myBrowser">Choose a browser from this list:</label>
+<input list="browsers" id="myBrowser" name="myBrowser" />
+<datalist id="browsers">
+  <option value="Chrome">
+  <option value="Firefox">
+  <option value="Internet Explorer">
+  <option value="Opera">
+  <option value="Safari">
+  <option value="Microsoft Edge">
+</datalist>
+```
+具体使用请参考： https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist
