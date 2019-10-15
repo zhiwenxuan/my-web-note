@@ -198,7 +198,7 @@ btn.addEventListener('click', function(event) {
 
 `event` 对象有很多属性，可以查看 [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Event)，下面对几个重要的属性进行介绍。
 
-##### 关于事件目标
+##### 1）关于事件目标
 this 始终等于 currentTarget 的值，而 target 指向的事件实际的目标（触发点）。如果直接将事件处理函数指定给目标元素，this、currentTarget 和 target 的值相同。
 
 ```js
@@ -220,7 +220,7 @@ document.body.onclick = function(event){
 
 ```
 
-##### 事件类型 type
+##### 2）事件类型 type
 通过 event.type 可以判断是什么类型的事件。
 
 一个小应用，通过一个函数处理多种事件，如下：
@@ -244,7 +244,7 @@ btn.onmouseover = handler;
 btn.onmouseout = handler;
 ```
 
-##### 阻止特定事件的默认行为 preventDefault()
+##### 3）阻止特定事件的默认行为 preventDefault()
 
 ```js
 // 阻止 <a> 默认的跳转页面行为
@@ -255,7 +255,7 @@ link.onclick = function(event){
 ```
 **注意点**：只有 event.cancelable 设置为 true 时，才能使用 preventDefault() 阻止默认行为。
 
-##### 阻止冒泡 stopPropagation()
+##### 4）阻止冒泡 stopPropagation()
 ```js
 var btn = document.getElementById("myBtn");
 btn.onclick = function(event){
@@ -267,7 +267,7 @@ document.body.onclick = function(event){
 }
 ```
 
-##### 事件流阶段 eventPhase
+##### 5）事件流阶段 eventPhase
 - 捕获阶段： eventPhase 为 1  
 - 目标阶段： eventPhase 为 2  
 - 冒泡阶段： eventPhase 为 3  
@@ -287,7 +287,7 @@ document.body.onclick = function(event){
 
 #### 13.3.2 IE中的事件对象
 
-##### 访问 event 对象
+##### 1）访问 event 对象
 根据添加事件的方式不同，访问 IE 中 event 对象方式也不同。使用 DOM0级方法时，event 挂载在 window 上；使用 attachEvent 时，event 作为参数传入。
 
 ```js
@@ -305,7 +305,7 @@ btn.attachEvent("onclick", function(event) {
 });
 ```
 
-##### IE 中 event 对象跟 DOM 的 event 对象主要不同之处
+##### 2）IE 中 event 对象跟 DOM 的 event 对象主要不同之处
 ```js
 cancelBubble // 默认 false，设置为 true 时，跟 DOM 中 stopPropagation() 作用一样
 returnValue // 默认为 true，设置为 false 时，跟 DOM 中 preventDefault() 作用一样
@@ -446,7 +446,7 @@ btn.onclick = function(event){
 
 #### 13.4.3 鼠标与滚轮事件
 
-##### 种类：
+##### 1）种类：
 ```
 - click：单击主鼠标按钮（一般是左边的按钮）或者 按下回车键时触发
 - dbclick
@@ -466,3 +466,313 @@ btn.onclick = function(event){
 
 mousedown -> mouseup -> click -> mousedown -> mouseup -> click -> dbclick
 
+##### 2）关于鼠标位置
+clientX、clientY：鼠标指针在**视口**中的水平和垂直坐标
+
+pageX、pageY：鼠标指针在**页面**中的水平和垂直坐标
+
+screenX、screenY：鼠标指针相对**整个电脑屏幕**的水平和垂直坐标
+
+##### 3）修改键
+按下鼠标时，键盘中的某些按键也可能按下，通过组合可以进行不同的操作。这些修改键有：Shift、Ctrl、Alt 和 Meta（在 Windows 键盘中是Windows建；在Mac 中是 Cmd 键），常用来修改鼠标事件的行为。
+
+DOM 规定了 4 个布尔值属性：shiftKey、ctrlKey、altKey 和 metaKey（IE8及之前不支持）。如果相应的键被按下，值则为 true，否则为 false。
+
+```js
+var div = document.getElementById("myDiv");
+EventUtil.addHandler(div, "click", function(event){
+  event = EventUtil.getEvent(event);
+
+  if (event.shiftKey){ // 同时按下鼠标和 shift 键
+    // do something
+  }
+  if (event.ctrlKey){
+    // do something
+  }
+  if (event.altKey){
+    // do something
+  }
+  if (event.metaKey){
+    // do something
+  }
+});
+```
+**通过修改键和鼠标的结合，可以支持更多的场景，解决一些事件冲突。**
+
+##### 4）相关元素
+mouseover 和 mouseout 事件都会涉及把鼠标指针从一个元素的边界之内移动到另外的元素的边界之内。  
+对于 mouseover，主目标是获得光标的元素，相关元素是失去光标的元素。  
+对于 mouseout，主目标是失去光标的元素，相关元素是获得光标的元素。
+
+##### 5）鼠标按钮
+对于 mousedown 和 mouseup 事件来说，event 对象中存在 button属性，表示按下或释放的按钮。
+
+在 DOM 标准中，值分别如下：  
+```js
+event.button === 0; // 主鼠标按钮
+event.button === 1; // 中间鼠标按钮
+event.button === 2; // 次鼠标按钮
+```
+
+在 IE8及之前版本中，值如下：
+```js
+event.button === 0; // 没有按下按钮
+event.button === 1; // 按下主鼠标按钮
+event.button === 2; // 按下次鼠标按钮
+event.button === 3; // 同时按下主鼠标按钮和次鼠标按钮
+event.button === 4; // 按下中间鼠标按钮
+event.button === 5; // 同时按下主鼠标按钮和中间鼠标按钮
+event.button === 6; // 同时按下次鼠标按钮和中间鼠标按钮
+event.button === 7; // 同时按下三个鼠标按钮
+```
+
+##### 6）鼠标滚轮事件
+mousewheel （IE、Opera、Chrome、Safari），event 中的 wheelDelta 属性记录鼠标滚动，向前滚动时 120 的倍数，向后滚动时 -120 的倍数。(Opera9.5 之前，正负值是反过来的)
+```js
+EventUtil.addHandler(document, "mousewheel", function(event){ 
+  event = EventUtil.getEvent(event); 
+  alert(event.wheelDelta);
+});
+```
+
+Firefox 中事件名称是 DOMMouseScroll ，使用 detail 来记录，向前是 3 的倍数，向后是 -3 的倍数。
+```js
+EventUtil.addHandler(window, "DOMMouseScroll", function(event){ 
+  event = EventUtil.getEvent(event);
+  alert(event.detail);
+});
+```
+
+兼容性函数：
+```js
+var EventUtil = { 
+  // 省略其他代码
+
+  getWheelDelta: function(event){
+    if (event.wheelDelta){ 
+      return (client.engine.opera && client.engine.opera < 9.5 ?
+            -event.wheelDelta : event.wheelDelta);
+    } else {
+      return -event.detail * 40; // Firefox 的，统一转为120
+    }
+  },
+
+  // 省略其他代码 
+};
+```
+
+##### 7）触摸设备
+对于 iPhone 和 iPad 中的 Safari：   
+- 不支持 dblclick
+- 单击元素触发 mousemove
+- mousemove 事件也会触发 mousover 和 mouseout
+- 两个手指放在屏幕移动会触发 mousewheel 和 scroll
+
+其他设备和浏览器请查看文档
+
+
+#### 13.4.4 键盘与文本事件
+
+##### 1）键盘事件种类
+```
+keydown: 按下键盘任意键触发，按住不放，重复触发
+keypress：按下键盘字符键触发，按住不放，重复触发
+keyup：释放按键触发
+```
+
+##### 2）键码
+`event.keyCode` 表示键盘的按键。
+
+##### 3）textInput 事件
+“DOM3级事件” 规范引入的新事件。当用户在可编辑区域中输入字符，就会触发这个事件。event.data 属性记录输入的字符。
+```js
+var textbox = document.getElementById("myText");
+EventUtil.addHandler(textbox, "textInput", function(event){ 
+  event = EventUtil.getEvent(event);
+  alert(event.data);
+});
+```
+
+event.inputMethod 属性记录文本输入的方式，具体查看文档。
+
+#### 13.4.5 变动事件
+DOM 中某一部分发生变化时触发。 具体可以查看文档。
+
+```js
+DOMSubtreeModified
+DOMNodeInserted
+DOMNodeRemoved
+DOMNodeInsertedIntoDocument
+OMNodeRemovedFromDocument
+DOMAttrModified
+DOMCharacterDataModified
+```
+
+#### 13.4.6 HTML5 事件
+
+##### 1）contextmenu 事件
+菜单事件，通过单击鼠标右键触发。
+
+```js
+EventUtil.addHandler(window, "load", function(event){
+  var div = document.getElementById("myDiv");
+  EventUtil.addHandler(div, "contextmenu", function(event){
+    event = EventUtil.getEvent(event);
+    EventUtil.preventDefault(event);
+    var menu = document.getElementById("myMenu");
+    menu.style.left = event.clientX + "px";
+    menu.style.top = event.clientY + "px";
+    menu.style.visibility = "visible";
+  });
+  EventUtil.addHandler(document, "click", function(event){ 
+    document.getElementById("myMenu").style.visibility = "hidden";
+  });
+});
+```
+
+兼容性： IE、Firefox、Safari、Chrome 和 Opera 11+
+
+##### 2）beforeunload 事件
+当用户关闭页面时触发，可以用来提醒用户是否要关闭页面，比如用户还没有保存表单内容
+
+```js
+EventUtil.addHandler(window, "beforeunload", function(event){ 
+  event = EventUtil.getEvent(event);
+  var message = "I'm really going to miss you if you go."; 
+  event.returnValue = message;
+  return message;
+});
+```
+兼容性： IE、Firefox、Safari、Chrome 和 Opera 11+
+
+##### 3）DOMContentLoaded 事件
+load 事件是要等一切都加载完毕触发，DOMContentLoaded 事件则在形成完整的 DOM 树之后触发，不理会 图像、JavaScript、CSS 等资源。
+
+好处：可以让用户尽早与页面进行交互。
+
+兼容性：IE9+、Firefox、Safari、Chrome 和 Opera 9+
+
+##### 4）hashchange 事件
+HTML5 新增了 hashchange 事件，当 URL 中 hash 值发生变化时触发。MVVM 框架的 hash 模式路由框架就是依靠这个来实现的。
+
+```js
+EventUtil.addHandler(window, "hashchange", function(event){ 
+  alert("Old URL: " + event.oldURL + "\nNew URL: " + event.newURL);
+});
+```
+
+兼容性：IE8+、Firefox、Safari、Chrome 和 Opera 10.6+
+
+
+#### 13.4.7 设备事件
+略
+
+#### 13.4.8 触摸与手势事件
+
+##### 1）触摸事件
+
+```
+touchstart ：手指触摸屏幕时触发
+touchmove ：手指在屏幕上滑动时连续触发
+touchend ：手指从屏幕移开
+```
+具体使用看文档
+
+##### 2）手势事件
+iOS2.0 中 Safari 引入一组手势事件。如下：
+
+```
+gesturestart: 当一个手指已经在屏幕上，另外一个手指有触摸屏幕
+gesturechange：当触摸屏幕的任意一个手指发生变化
+gestureend：当任何一个手指从屏幕上移开时
+```
+具体使用看文档
+
+### 13.5 内存和性能
+每个函数都是对象，都会占用内存；内存中的对象越多，性能就越差；如果访问 DOM 次数过多，会延迟整个页面的交互就绪时间等。
+
+所以要合理使用事件。
+
+#### 13.5.1 事件委托
+对绑定事件过多问题的解决方案就是事件委托。事件委托利用了事件冒泡，只指定一个事件处理程序，就可以管理某一类型的所有事件。
+
+例如，click 事件会一直冒泡到document 层次。就是说，可以为整个页面指定一个 onclick 事件处理程序，而不必给每一个可以单击的元素分别添加事件处理程序。
+
+```html
+<ul id="myLinks">
+    <li id="goSomewhere">Go somewhere</li>
+    <li id="doSomething">Do something</li>
+    <li id="sayHi">Say hi</li>
+</ul>
+```
+
+不好的做法，每个都添加事件
+```js
+var item1 = document.getElementById("goSomewhere");
+var item2 = document.getElementById("doSomething");
+var item3 = document.getElementById("sayHi");
+
+EventUtil.addHandler(item1, "click", function(event){
+  location.href = "http://www.wrox.com";
+});
+EventUtil.addHandler(item2, "click", function(event){
+  document.title = "I changed the document's title"; 
+});
+EventUtil.addHandler(item3, "click", function(event){
+    alert("hi");
+});
+```
+
+好的做法，将点击事件委托在父级元素 ul 上，减少事件处理程序，减少内存等
+```js
+var list = document.getElementById("myLinks");
+EventUtil.addHandler(list, "click", function(event){
+  event = EventUtil.getEvent(event);
+  var target = EventUtil.getTarget(event);
+  switch(target.id){
+  case "doSomething":
+    document.title = "I changed the document's title";
+    break;
+  case "goSomewhere":
+    location.href = "http://www.wrox.com";
+    break;
+  case "sayHi": 
+    alert("hi");
+    break; 
+  }
+});
+```
+
+#### 13.5.2 移除事件处理程序（解除事件绑定）
+从上面知道，绑定事件是比较耗性能的，当不需要事件绑定时，要及时解除事件绑定，从而提升性能。
+
+### 13.6 模拟事件
+
+几个关键点：
+```js
+ document.createEvent() // 创建事件，接收一个参数
+ dispatchEvent() // 触发事件
+
+ // 过时的方式
+ // Create the event.
+var event = document.createEvent('Event');
+// Define that the event name is 'build'.
+event.initEvent('build', true, true);
+// Listen for the event.
+document.addEventListener('build', function (e) {
+  // e.target matches document from above
+}, false);
+// target can be any Element or other EventTarget.
+document.dispatchEvent(event);
+
+// 如今的做法
+var event = new Event('build');
+// Listen for the event.
+elem.addEventListener('build', function (e) { ... }, false);
+// Dispatch the event.
+elem.dispatchEvent(event);
+```
+具体可以查看 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/Guide/Events/Creating_and_triggering_events)
+
+### 13.7 小结
+本章主要讲事件，包括事件流、事件处理程序、事件对象、事件类型等。使用事件时要注意性能等。
