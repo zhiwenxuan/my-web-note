@@ -165,7 +165,7 @@ if (audio.canPlayType("audio/mpeg")) {
 
 
 ### 16.4 历史状态管理
-前面13章，我们讲到。通过 hashchange 事件，可以知道 URL 的 hash 参数什么时候发生变化。MVVM 框架的路由的 hash 就是依赖这个来实现的。
+前面13章，我们讲到。通过 hashchange 事件，可以知道 URL 的 hash 参数什么时候发生变化。MVVM 框架的路由的 hash 模式就是依赖这个来实现的。
 
 现在来讲一下，MVVM 框架的路由的 history 模式的实现依赖。
 
