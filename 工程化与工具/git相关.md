@@ -65,7 +65,7 @@ merge 部分 commit:
 
 ```
 $ git cherry-pick 6bbf6b4
-``
+```
 注：6bbf6b4是commitid,多个commit 用空格间隔。比如：
 ```
 $ git cherry-pick 6bbf6b4 78fbadd egiiegd
