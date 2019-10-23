@@ -59,3 +59,15 @@ git reflog
 // 回到 rebase 前
 git reset --hard HEAD@{n}
 ```
+
+merge 部分 commit:   
+在多分支开发中，可能会会出现这样的情况：分支A作为项目主干，一般项目会把它作为预发布的分支；分支B作为bugfix分支，只作为bug修复之用，一般改完bug后集中merge到分支A，有时候不想全部merge，只希望提交部分的修改，这时候就需要用到cherry-pick命令。
+
+```
+$ git cherry-pick 6bbf6b4
+``
+注：6bbf6b4是commitid,多个commit 用空格间隔。比如：
+```
+$ git cherry-pick 6bbf6b4 78fbadd egiiegd
+```
+
