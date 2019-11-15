@@ -18,7 +18,7 @@ Singleton.prototype.getName = function() {
   return this.name;
 };
 
-Singleton.prototype.getInstance = function(name) {
+Singleton.getInstance = function(name) {
   // 还没创建
   if (!this.instance) {
     this.instance = new Singleton(name);
