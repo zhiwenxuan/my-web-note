@@ -1,9 +1,18 @@
 # git相关
 
 ## 关于 git 配置
+
+1. 配置全局默认的邮箱和用户名
 ```
 $ git config --global user.name "Zhenqi Li"
 $ git config --global user.email zhenqi.li@dream.com
+```
+
+2. 配置某个项目的邮箱和用户名
+```
+$ cd project
+$ git config user.name "Zhenqi Li"
+$ git config user.email zhenqi.li@dream.com
 ```
 
 ## 关于 git 开发常用
