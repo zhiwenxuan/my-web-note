@@ -1,6 +1,12 @@
 # git相关
 
-## 记录关于git 分支操作几个命令
+## 关于 git 配置
+```
+$ git config --global user.name "Zhenqi Li"
+$ git config --global user.email zhenqi.li@dream.com
+```
+
+## 关于 git 开发常用
 
 查看分支：git branch
 
