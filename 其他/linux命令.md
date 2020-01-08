@@ -7,3 +7,8 @@
 ```
 $ mkdir -p 文件夹名
 ```
+
+查看端口占用
+```
+sudo lsof -i -P | grep -i "port"
+```
