@@ -141,6 +141,9 @@ GPSDateStamp	                  GPS 日期
 GPSDifferential	                GPS 修正
 ```
 ## 参考
+http://www.exif.org/Exif2-2.PDF
+
 https://www.sojson.com/image/exif.html  
 
 https://blog.csdn.net/ouyangtianhan/article/details/29825885
+
