@@ -86,3 +86,27 @@ $ git cherry-pick -m 1 86ccb31d90d7f987233eb53cf6946dadaba7f5bb
 $ git cherry-pick 6bbf6b4 78fbadd egiiegd
 ```
 
+批量删除分支
+```
+// 批量删除匹配 staging 的远程分支
+git branch -r| grep -E 'staging' | sed 's/origin\///g' | xargs -I {} git push origin :{}
+
+// 批量删除除了 master和develop 的远程分支
+git branch -r| grep -v -E 'master|develop' | sed 's/origin\///g' | xargs -I {} git push origin :{}
+
+// 批量删除除了 master和develop 的本地分支
+git branch -a | grep -v -E 'master|develop' | xargs git branch -D
+
+用到命令说明
+
+grep -v -E 排除master 和 develop
+
+-v 排除
+
+-E 使用正则表达式
+
+xargs 将前面的值作为参数传入 git branch -D 后面
+
+-I {} 使用占位符 来构造 后面的命令
+```
+
